@@ -1,0 +1,18 @@
+# Modules
+node_modules/
+
+# macOS
+.DS_Store
+
+# Keys
+*.pem
+
+# aws 
+aws.txt
+scp.txt
+
+# Photoshop files
+*.psd
+
+# Token
+token.js

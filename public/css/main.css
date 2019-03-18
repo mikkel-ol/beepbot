@@ -1,0 +1,91 @@
+html, body {
+	font-family: Whitney;
+  height: 100%;
+	width: 100%;
+  color: white;
+
+	/* NO SELECT / HIGHTLIGHT */
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+	     -moz-user-select: none; /* Firefox */
+	      -ms-user-select: none; /* Internet Explorer/Edge */
+	          user-select: none; /* Non-prefixed version, currently
+	                                supported by Chrome and Opera */
+}
+
+
+
+.container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 72px 264px 1fr 264px;
+    grid-template-rows: 53px auto;
+}
+
+.container div {
+    background-color: #282b2f;
+}
+
+#topbar {
+    grid-column: 2 / end;
+    grid-row: 1 / span 1;
+
+    -webkit-box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.75);
+}
+
+#server-list {
+    grid-column: 1 / span 1;
+    grid-row: 1 / end;
+}
+
+#sidebar {
+    grid-column: 2 / span 1;
+    grid-row: 2 / end;
+}
+
+#soundboard {
+    grid-column: 3 / span 1;
+    grid-row: 2 / end;
+    background: #36393d;
+}
+
+#people-list {
+    grid-column: 4 / end;
+    grid-row: 2 / end;
+}
+
+
+
+
+
+
+
+/*              FACE THAT FONT               */
+@font-face {
+    font-family: Whitney;
+    font-weight: 300;
+    src: url(/fonts/whitney300.woff) format("woff")
+}
+@font-face {
+    font-family: Whitney;
+    font-weight: 400;
+    src: url(/fonts/whitney400.woff) format("woff")
+}
+@font-face {
+    font-family: Whitney;
+    font-weight: 500;
+    src: url(/fonts/whitney500.woff) format("woff")
+}
+@font-face {
+    font-family: Whitney;
+    font-weight: 600;
+    src: url(/fonts/whitney600.woff) format("woff")
+}
+@font-face {
+    font-family: Whitney;
+    font-weight: 700;
+    src: url(/fonts/whitney700.woff) format("woff")
+}
