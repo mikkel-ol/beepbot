@@ -1,5 +1,7 @@
-const 	{ SOUNDPATH,
-					DEFAULT_VOLUME}	= require('./config');
+const { 
+	SOUNDPATH,
+	DEFAULT_VOLUME
+}	= require('./config');
 
 module.exports = {
 	play

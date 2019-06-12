@@ -1,7 +1,7 @@
 const 	commando = require('discord.js-commando'),
 	
 	{ 	EMOJI_SUCC,
-		EMOJI_FAIL } = require('../../config');
+		EMOJI_FAIL } = '';//require('../../config');
 
 class ActivityCommand extends commando.Command {
 	constructor(client) {
