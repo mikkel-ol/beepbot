@@ -1,6 +1,8 @@
+const path = require('path');
+
 const 
-	interval = require('../config/intervals').activity,
-	types = require('../config/activities');
+	interval = require(path.join(global.discordRoot, '/config/intervals')).activity,
+	types = require(path.join(global.discordRoot, '/config/intervals'));
 
 function set(bot) {
 	// Get random activity

@@ -1,8 +1,10 @@
+const path = require('path');
+
 const 
-	interval = require('../config/intervals').channelName,
-	names = require('../config/names'),
-	id = require('../config/ids').server,
-	colors = require('../../common/colors');
+	interval = require(path.join(global.discordRoot, '/config/intervals')).channelName,
+	names = require(path.join(global.discordRoot, '/config/names')),
+	id = require(path.join(global.discordRoot, '/config/ids')).server,
+	colors = require(path.join(global.appRoot, '/common/colors'));
 
 let newEmoji;
 

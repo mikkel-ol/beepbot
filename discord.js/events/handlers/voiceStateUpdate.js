@@ -1,4 +1,6 @@
-const greetings = require('../../helpers/greeting');
+const path = require('path');
+
+const greetings = require(path.join(global.discordRoot, '/helpers/greeting'));
 
 module.exports = (bot) => {
 	bot.on('voiceStateUpdate', (oldMember, newMember) => {

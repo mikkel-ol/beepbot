@@ -1,8 +1,10 @@
+const path = require('path');
+
 const 
-	message = require('../../config/messages').ready,
+	message = require(path.join(global.discordRoot, '/config/messages')).ready,
 	loops = [
-		require('../../loops/activity'),
-		require('../../loops/channelName')
+		require(path.join(global.discordRoot, '/loops/activity')),
+		require(path.join(global.discordRoot, '/loops/channelname'))
 	];
 
 module.exports = (bot) => {	

@@ -1,3 +1,6 @@
+// Set discord.js folder root
+global.discordRoot = global.appRoot + '/discord.js'
+
 const 
     Discord = require('discord.js-commando'),
 	bot = new Discord.Client(),

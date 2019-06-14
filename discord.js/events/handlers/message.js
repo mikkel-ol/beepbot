@@ -1,6 +1,8 @@
+const path = require('path');
+
 const 
-	replies = require('../../config/messages'),
-	probability = require('../../config/probabilities').ninegagReply;
+	replies = require(path.join(global.discordRoot, '/config/messages'));
+	probability = require(path.join(global.discordRoot, '/config/probabilities')).ninegagReply;
 
 module.exports = (bot) => {
 	bot.on('message', (message) => {
