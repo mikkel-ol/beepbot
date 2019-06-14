@@ -1,3 +1,6 @@
+// Set express folder root
+global.expressRoot = global.appRoot + '/express'
+
 const 
     Express = require('express'),
     server = Express(),
@@ -36,7 +39,7 @@ passport.use(new DiscordStrategy({
 	clientSecret: '7fQDyJLdnUlG3H-6JaiHzYTI9ikNqxCk',
 	callbackURL: 'http://beepbot.dk/auth/callback',
 	scope: scopes
-}, function (accessToken, refreshToken, profile, callback) {
+}, (accessToken, refreshToken, profile, callback) => {
 
 	// Do stuff with tokens here
 

@@ -22,5 +22,8 @@ module.exports = {
 		`Wadu hek? **${member.displayName}** hek!`,
 		`AND HIS NAME IS **JOHN ${member.displayName}**!`,
 		`**${member.displayName}**? Det' ham der, der er på den båååd der!`
-	]
+	],
+	permission: {
+		missing: 'You do not have permissions to do that'
+	}
 };

@@ -9,7 +9,7 @@ class ActivityCommand extends commando.Command {
 			name: 'activity',
 			group: 'control',
 			memberName: 'activity',
-			description: 'Sets the activity of Mr. Beep Bot'
+			description: 'Set my activity'
 		});
 	}
 

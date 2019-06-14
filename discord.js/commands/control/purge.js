@@ -1,4 +1,9 @@
-const commando = require('discord.js-commando');
+const path = require('path');
+
+const 
+	commando = require('discord.js-commando'),
+	messages = require(path.join(global.discordRoot, '/config/messages'))
+
 
 class PurgeCommand extends commando.Command {
 	constructor(client) {
@@ -11,25 +16,22 @@ class PurgeCommand extends commando.Command {
 	}
 
 	async run(message, args) {
-		if (!message.member.roles.has("385745444988256258")) { return message.channel.send("You're too much of a peasant to be able to do that!"); }
+		// TODO: Set role ID's dynamically
+		if (!message.member.roles.has("589093915395620898")) 
+			return message.channel.send(messages.permissions.missing);
 
 		var count = 5;
 		if (args) {
 			count = (parseInt(args, 10) + 1);
 		}
 
-	    if(!count || count < 2 || count > 50) { return message.channel.send("Please provide a number between 2 and 50!"); }
+		if(!count || count < 2 || count > 50) 
+			return message.channel.send("Please provide a number between 2 and 50");
 
 	    const fetched = await message.channel.fetchMessages({limit: count});
 
-	    /*
-	    for (var i = 0; i < fetched.size; i++) {
-
-	    }
-	    */
-
 	    message.channel.bulkDelete(fetched)
-	      .catch(error => message.channel.send(`Couldn't delete messages because of: ${error}`));
+	      .catch(error => message.channel.send(`Couldn't delete messages: ${error}`));
 	}
 }
 
