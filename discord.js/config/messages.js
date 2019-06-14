@@ -25,5 +25,7 @@ module.exports = {
 	],
 	permission: {
 		missing: 'You do not have permissions to do that'
-	}
+	},
+	success: `✅`,
+	fail: `❌`
 };

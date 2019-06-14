@@ -12,7 +12,8 @@ class VolumeCommand extends commando.Command {
 
 	async run(message, args) {
 		if (message.guild.voiceConnection) {
-			if (!message.guild.voiceConnection.speaking) { return message.channel.send("Nothing is playing.."); }
+			if (!message.guild.voiceConnection.speaking) 
+				return message.channel.send("Nothing is playing..");
 
 			else {
 				if (!args) { return message.channel.send(`Current volume is **${message.guild.voiceConnection.dispatcher.volume*100}%**`); }
@@ -20,7 +21,7 @@ class VolumeCommand extends commando.Command {
 					message.guild.voiceConnection.dispatcher.setVolume(args / 100);
 					return message.channel.send(`Volume set to **${message.guild.voiceConnection.dispatcher.volume*100}%**`);
 				}
-				else return message.channel.send("Volume must be a number between 0 and 100.");
+				else return message.channel.send("Volume must be a number between 0 and 100");
 			}
 
 		}

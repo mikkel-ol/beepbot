@@ -13,7 +13,7 @@ class StopCommand extends commando.Command {
 	async run(message, args) {
 		if (message.guild.voiceConnection) { 
 			message.delete();
-			return message.guild.voiceConnection.disconnect(); 
+			message.guild.voiceConnection.disconnect(); 
 		}
 		else { message.channel.send("Not in a voice connection..") }
 	}
