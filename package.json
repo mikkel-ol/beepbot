@@ -1,11 +1,8 @@
 {
   "name": "discordbot",
   "version": "1.0.0",
-  "description": "First discord.js bot!",
+  "description": "Beep bot Discord bot!",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Mikkel O. Laursen",
   "license": "ISC",
   "dependencies": {
