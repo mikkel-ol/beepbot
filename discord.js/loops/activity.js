@@ -2,7 +2,8 @@ const path = require('path');
 
 const 
 	interval = require(path.join(global.discordRoot, '/config/intervals')).activity,
-	types = require(path.join(global.discordRoot, '/config/intervals'));
+	types = require(path.join(global.discordRoot, '/config/activities')),
+	colors = require(path.join(global.appRoot, '/common/colors'));
 
 function set(bot) {
 	// Get random activity
@@ -10,7 +11,7 @@ function set(bot) {
 	activity = types[i]; 
 
 	bot.user.setActivity(activity.status, activity.options) // Set it
-		.then(presence => { console.log(`Changed my activity to: ${activity.options.type} ${activity.status}`) } )
+		.then(presence => console.log(colors.green + `Changed my activity to: ` + colors.default + `${activity.options.type} ${activity.status}`))
 		.catch(console.error);
 }
 
