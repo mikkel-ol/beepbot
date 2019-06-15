@@ -12,7 +12,7 @@ function newMember(member) {
 
 	if (!member.guild.available)
 		return console.error(`ERROR: Cannot greet new member on guild \"${member.guild.name}\". Guild unavailable`);
-	
+
 	// TODO: Let users select which text channel to send to (web site)
 	member.guild.channels.filter((channel) => channel.type == 'text').first().send(message); // Send greeting to first text channel in guild
 }
@@ -25,11 +25,12 @@ function voiceChannelJoin(newMember) {
 	if (idArr.includes(parseInt(newMember.id))) {
 		const dirs = fs.getDirectories(greetingsPath);
 		const dir = dirs.find((currentDir) => currentDir == newMember.id);
-		
+
 		// If new member does not have greetings, return
 		if (dir == undefined) return;
 
-		newMember.voiceChannel.join()
+		newMember.voiceChannel
+			.join()
 			.then((connection) => {
 				const file = fs.getRandomFileFromDirectory(greetingsPath, dir);
 				const fullPath = __dirname + '/../..' + greetingsPath + newMember.id + '/' + file;
@@ -39,7 +40,13 @@ function voiceChannelJoin(newMember) {
 				const dispatcher = connection.playFile(fullPath);
 				dispatcher.setVolumeLogarithmic(volume);
 
-				dispatcher.on('end', (reason) => newMember.setMute(false));
+				dispatcher.on('end', (reason) =>
+						setTimeout(function() {
+							// Stupid 'end' bug
+							newMember.setMute(false);
+						}),
+					500
+				);
 			})
 			.catch(console.log);
 	}

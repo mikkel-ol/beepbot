@@ -8,7 +8,13 @@ module.exports = (voiceChannel) => {
 			const dispatcher = connection.playFile(__dirname + '../..' + soundPath + '420.wav')
 
 			dispatcher.setVolume(.5);
-			dispatcher.on('end', reason => voiceChannel.leave());
+			dispatcher.on('end', (reason) =>
+						setTimeout(function() {
+							// Stupid 'end' bug
+							voiceChannel.leave();
+						}),
+					500
+				);
 		})
 		.catch(console.error);
 }
