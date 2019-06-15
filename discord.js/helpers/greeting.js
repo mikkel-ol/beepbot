@@ -23,8 +23,8 @@ function voiceChannelJoin(newMember) {
 
 	// If user is in array
 	if (idArr.includes(parseInt(newMember.id))) {
-		const dirs = fs.getDirectories(greetingsPath);
-		const dir = dirs.find((currentDir) => currentDir == newMember.id);
+		let dirs = fs.getDirectories(greetingsPath);
+		let dir = dirs.find((currentDir) => currentDir == newMember.id);
 
 		// If new member does not have greetings, return
 		if (dir == undefined) return;
@@ -32,16 +32,17 @@ function voiceChannelJoin(newMember) {
 		newMember.voiceChannel
 			.join()
 			.then((connection) => {
-				const file = fs.getRandomFileFromDirectory(greetingsPath, dir);
-				const fullPath = __dirname + '/../..' + greetingsPath + newMember.id + '/' + file;
+				let file = fs.getRandomFileFromDirectory(greetingsPath, dir);
+				let fullPath = __dirname + '/../..' + greetingsPath + newMember.id + '/' + file;
 
 				newMember.setMute(true);
 
-				const dispatcher = connection.playFile(fullPath);
+				let dispatcher = connection.playFile(fullPath);
 				dispatcher.setVolumeLogarithmic(volume);
 
 				dispatcher.on('end', (reason) =>
 						setTimeout(function() {
+							if (!newMember.voiceChannel) return;
 							// Stupid 'end' bug
 							newMember.setMute(false);
 						}),
