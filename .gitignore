@@ -16,3 +16,6 @@ scp.txt
 
 # Token
 token.js
+
+# Client secret
+secret.js
