@@ -33,7 +33,6 @@ function voiceChannelJoin(newMember) {
 			.join()
 			.then((connection) => {
 				let file = fs.getRandomAudioFileFromDirectory(greetingsPath, dir);
-				console.log(file);
 				let fullPath = path.join(__dirname, '/../..', greetingsPath, newMember.id, '/', file);
 
 				newMember.setMute(true);
