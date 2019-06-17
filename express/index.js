@@ -56,7 +56,7 @@ module.exports = {
 
 		// SPA fallback catching
 		// Will serve any unknown routes as "/"
-		// TODO: Currently not working
+		// TODO: Fix dotRule
 		server.use(history());
 
 		server.use(Express.static(global.expressRoot + '/dist'));
