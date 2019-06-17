@@ -22,13 +22,6 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
-    },
-    {
-      path: '/auth',
-      beforeEnter: (to, from, next) => {
-        window.location.href = process.env.VUE_APP_OAUTH_URL;
-        next();
-      }
     }
   ]
 })

@@ -1,7 +1,8 @@
 // Set express folder root
 global.expressRoot = global.appRoot + '/express';
 
-const path = require('path'),
+const 
+	path = require('path'),
 	config = require('./config/app'),
 	messages = require('./config/messages'),
 	client = {
@@ -9,7 +10,8 @@ const path = require('path'),
 		secret: require(global.appRoot + '/discord.js/config/secret.js')
 	};
 
-const Express = require('express'),
+const 
+	Express = require('express'),
 	server = Express(),
 	session = require('express-session'),
 	expressValidator = require('express-validator'),

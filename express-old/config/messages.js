@@ -1,6 +1,4 @@
-const path = require('path');
-
-const colors = require(path.join(global.appRoot, '/common/colors'));
+const colors = require('../../common/colors');
 const port = require('./app').port;
 
 module.exports = {

@@ -43,6 +43,7 @@ export default {
   }
 };
 
+//! This is shit..
 function init() {
   // Loading animation
   setTimeout(() => {

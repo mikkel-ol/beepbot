@@ -5,8 +5,8 @@ const serversDbContext = require('./helpers/database').Servers;
 
 const Discord = require('discord.js-commando'),
 	bot = new Discord.Client(),
-	commands = require('./commands/main'),
-	events = require('./events/main'),
+	commands = require('./commands'),
+	events = require('./events'),
 	token = require('./token'),
 	fs = require('fs');
 

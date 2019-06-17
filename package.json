@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "First discord.js bot!",
   "main": "index.js",
+  "scripts": {
+    "dev": "export NODE_ENV=dev && nodemon ."
+  },
   "author": "Mikkel O. Laursen",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "bounce.js": "^0.8.2",
     "connect-flash": "^0.1.1",
+    "connect-history-api-fallback": "^1.6.0",
     "console-stamp": "^0.2.9",
     "cookie-parser": "^1.4.4",
     "discord.js": "^11.5.1",
