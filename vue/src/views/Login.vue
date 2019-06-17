@@ -27,13 +27,13 @@
 </template>
 
 <style lang="scss">
-@import "../styles/_home.scss";
+@import "../styles/_login.scss";
 </style>
 
 
 <script>
 export default {
-  name: "home",
+  name: "login",
   components: {},
   methods: {
     init
