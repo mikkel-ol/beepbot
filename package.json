@@ -4,7 +4,8 @@
   "description": "First discord.js bot!",
   "main": "index.js",
   "scripts": {
-    "dev": "export NODE_ENV=dev && nodemon ."
+    "dev": "export NODE_ENV=dev && nodemon .",
+    "prod": "export NODE_ENV=production && nodemon ."
   },
   "author": "Mikkel O. Laursen",
   "license": "ISC",

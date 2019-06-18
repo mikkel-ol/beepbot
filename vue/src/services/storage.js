@@ -1,7 +1,6 @@
 // TODO: This can maybe be done with self.$set in Vue.js
 
-
-const StorageManager = {
+const StorageService = {
   setToken(token) {
     localStorage.setItem("beepbot-token", JSON.stringify(token));
   },
@@ -27,4 +26,4 @@ const StorageManager = {
   }
 };
 
-export default StorageManager;
+export default StorageService;

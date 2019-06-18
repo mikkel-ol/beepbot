@@ -3,13 +3,13 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import StorageManager from './services/storage';
+import StorageService from './services/storage';
 
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
-	const token = StorageManager.getToken();
-	const isExpired = token ? StorageManager.isExpired() : null;
+	const token = StorageService.getToken();
+	const isExpired = token ? StorageService.isExpired() : null;
 	// TODO: Handle refresh tokens
 
 	if (to.meta.requiresAuth) {

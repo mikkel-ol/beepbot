@@ -1,12 +1,15 @@
 let callbackUrl;
+let redirectUrl;
 
 switch (process.env.NODE_ENV) {
     case "production":
-        callbackUrl = "http://beepbot.dk/auth/callback"
+        callbackUrl = "http://beepbot.dk/auth/callback";
+        redirectUrl = "/";
         break;
     
     case "dev":
-        callbackUrl = "http://localhost/auth/callback"
+        callbackUrl = "http://localhost/auth/callback";
+        redirectUrl = "http://localhost:8080/";
         break;
     
     default:
@@ -17,6 +20,7 @@ switch (process.env.NODE_ENV) {
 module.exports = {
     port: 80,
     url: {
-        callback: callbackUrl
+        callback: callbackUrl,
+        redirect: redirectUrl
     }
 }

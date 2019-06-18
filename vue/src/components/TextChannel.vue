@@ -8,6 +8,9 @@
 
 <script>
 export default {
-    
+    name: "textchannel",
+    props: ['id', 'name']
 }
 </script>
+
+

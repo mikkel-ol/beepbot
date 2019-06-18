@@ -1,5 +1,8 @@
+const path = require('path');
+
 const express = require('express');
 const passport = require('passport');
+const config = require(path.join(global.expressRoot, "/config/app"));
 
 module.exports = () => {
 	const router = express.Router();
@@ -22,7 +25,7 @@ module.exports = () => {
 
 			return req.login(user, (loginErr) => {
 				if (loginErr) return next(loginErr);
-				return res.redirect('/');
+				return res.redirect(config.url.redirect);
 			});
 		})(req, res, next);
 	});

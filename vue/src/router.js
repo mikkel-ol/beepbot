@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Soundboard from './views/Soundboard.vue';
+import Home from './views/Home.vue';
 import Login from './views/Login.vue';
+import Error from './views/Error.vue';
 
 Vue.use(Router);
 
@@ -12,10 +13,10 @@ export default new Router({
 	routes: [
 		{
 			path: '/',
-			name: 'soundboard',
-			component: Soundboard,
+			name: 'home',
+			component: Home,
 			meta: {
-				requiresAuth: true
+				requiresAuth: false
 			}
 		},
 		{
@@ -24,9 +25,14 @@ export default new Router({
 			component: Login
 		},
 		{
+			path: '/error',
+			name: 'error',
+			component: Error
+		},
+		{
 			path: '*',
 			name: 'catch-all',
-			redirect: { name: 'soundboard' }
+			redirect: { name: 'home' }
 		}
 	]
 });
