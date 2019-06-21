@@ -1,5 +1,5 @@
 // Set express folder root
-global.expressRoot = global.appRoot + '/express';
+global.expressRoot = global.appRoot + '/web/express';
 
 const Express = require('express'),
 	session = require('express-session'), // TODO: Save session data in mongo (leaks atm)
