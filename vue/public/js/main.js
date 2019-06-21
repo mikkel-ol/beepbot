@@ -19,23 +19,3 @@ function isSelected(element) {
   } )
   $(element).parent().addClass("selected");
 }
-
-function play(file) {
-  const url = "soundboard/play";
-  const httpMethod = "POST";
-
-  xmlhttp.open(httpMethod, url);
-  if (httpMethod == "POST") xmlhttp.setRequestHeader("Content-Type", "application/json");
-
-  xmlhttp.send(JSON.stringify({file: file}));
-}
-
-function changevc(vcID) {
-  const url = "soundboard/changevc";
-  const httpMethod = "POST";
-
-  xmlhttp.open(httpMethod, url);
-  if (httpMethod == "POST") xmlhttp.setRequestHeader("Content-Type", "application/json");
-
-  xmlhttp.send(JSON.stringify({ guildID: guildID, vcID: vcID }));
-}

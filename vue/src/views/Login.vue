@@ -1,21 +1,6 @@
 <template>
   <div class="home">
     <div id="frontpage">
-      <div class="sk-circle animated fadeIn">
-        <div class="sk-circle1 sk-child"></div>
-        <div class="sk-circle2 sk-child"></div>
-        <div class="sk-circle3 sk-child"></div>
-        <div class="sk-circle4 sk-child"></div>
-        <div class="sk-circle5 sk-child"></div>
-        <div class="sk-circle6 sk-child"></div>
-        <div class="sk-circle7 sk-child"></div>
-        <div class="sk-circle8 sk-child"></div>
-        <div class="sk-circle9 sk-child"></div>
-        <div class="sk-circle10 sk-child"></div>
-        <div class="sk-circle11 sk-child"></div>
-        <div class="sk-circle12 sk-child"></div>
-      </div>
-
       <div id="front-container">
         <img src="@/assets/logo.png" id="logo" class="animated bounceInLeft">
         <br>
@@ -65,10 +50,10 @@ function init() {
             transform: "scale(1)",
             opacity: "1"
           });
-        }, 500);
-      }, 1500);
-    }, 1000);
-  }, 1500);
+        }, /*500*/5);
+      }, /*1500*/15);
+    }, /*1000*/10);
+  }, /*1500*/15);
 
   // Click animation for logo
   $("#logo").click(() => {

@@ -8,6 +8,6 @@ const
 
 Logger();
 
-Express.start();
-
-Bot.start();
+Bot.start().then(bot => {
+    Express.start(bot);
+})

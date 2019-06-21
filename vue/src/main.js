@@ -1,16 +1,18 @@
 import Vue from 'vue';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import StorageService from './services/storage';
+// Attach axios to Vue object
+Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
+// TODO: Set this up properly with state in Vuex
 router.beforeEach((to, from, next) => {
-	const token = StorageService.getToken();
-	const isExpired = token ? StorageService.isExpired() : null;
-	// TODO: Handle refresh tokens
 
 	if (to.meta.requiresAuth) {
 		if (!token || isExpired) {

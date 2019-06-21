@@ -38,5 +38,6 @@ module.exports = {
 			await db.add({id: guild.id, roles: roleIDs});
 		});
 
+		return bot;
 	}
 };

@@ -1,19 +1,24 @@
-import axios from 'axios';
+import Vue from 'vue';
 
 const baseUrl = `${process.env.VUE_APP_API_HOST}`;
 
 const urls = {
 	sounds: `${baseUrl}/sounds`,
-	servers: `${baseUrl}/servers`
+	servers: `${baseUrl}/servers`,
+	voiceChannels: `${baseUrl}/soundboards/voicechannel`
 };
 
 const ApiService = {
 	async getSounds() {
-		return await axios.get(urls.sounds);
+		return await Vue.axios.create({withCredentials: true}).get(urls.sounds);
 	},
 
 	async getServers() {
-		return await axios.get(urls.servers);
+		return await Vue.axios.create({withCredentials: true}).get(urls.servers);
+	},
+
+	changeVoiceChannel(id) {
+		Vue.axios.create({withCredentials: true}).put(urls.voiceChannels, {id: id});
 	}
 };
 
