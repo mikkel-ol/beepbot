@@ -1,6 +1,6 @@
 const path = require('path');
 
-const soundPath = require(path.join(global.discordRoot, '/config/sound')).paths.fourtwenty;
+const soundPath = require(path.join(global.discordRoot, '/config/sounds')).paths.fourtwenty;
 
 module.exports = (voiceChannel) => {
 	voiceChannel.join()

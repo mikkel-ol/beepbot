@@ -18,8 +18,6 @@
   border-radius: 15px;
 }
 
-
-
 .guild-container .selected {
   border-radius: 15px;
 }
@@ -116,8 +114,8 @@
   margin-bottom: 7px;
 }
 
-#sidebar .text-channel-category, .voice-channel-category {
-  padding: 28px 0 20px 20px;
+#sidebar .text-channel-category, #sidebar .voice-channel-category {
+  padding: 28px 0 10px 20px;
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
@@ -129,9 +127,16 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 32px;
-  padding: 0 8px;
-  margin: 1px 0 1px 8px;
   text-decoration: none;
+}
+
+.channel-entry {
+  padding-left: 15px;
+}
+
+.voice-channel, .text-channel {
+  display: flex;
+  align-items: center;
 }
 
 .voice-channel a:hover {
@@ -142,6 +147,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   text-align: center;
 }
 

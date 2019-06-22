@@ -1,23 +1,27 @@
-const { lstatSync, readdirSync } = require('fs');
+const 
+    path = require('path'),
+    { lstatSync, readdirSync } = require('fs');
 
-function isDirectory(source, name) {
-    return lstatSync(__dirname + '/..' + source + name).isDirectory();
-}
+const fs = {
+	isDirectory: (source, name) => {
+		return lstatSync(global.appRoot + source + name).isDirectory();
+	},
 
-function getDirectories(source) {
-    return readdirSync(__dirname + '/..' + source).filter(name => isDirectory(source, name));
-}
+	getDirectories: source => {
+		return readdirSync(global.appRoot + source).filter(name => fs.isDirectory(source, name));
+	},
 
-function getRandomFileFromDirectory(path, name) {
-    var files = readdirSync(__dirname + '/..' + path + name);
+	getFiles: source => {
+        return readdirSync(global.appRoot + source).filter(name => !fs.isDirectory(source, name));
+    },
 
-    var random = files[Math.floor(Math.random() * files.length)];
+	getRandomFileFromDirectory: (path, name) => {
+		var files = readdirSync(global.appRoot + path + name);
 
-    return random;
-}
+		var random = files[Math.floor(Math.random() * files.length)];
 
-module.exports = {
-	isDirectory,
-    getDirectories,
-    getRandomFileFromDirectory
+		return random;
+	}
 };
+
+module.exports = fs;
