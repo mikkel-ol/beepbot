@@ -55,7 +55,7 @@ module.exports = [
 		}
 	},
 	{
-		status: 'netflix',
+		status: 'Netflix',
 		options: {
 			type: 'STREAMING',
 			url: 'http://twitch.tv/imaqtpie'

@@ -1,37 +1,27 @@
-const fs = require('fs');
-const path = require('path');
+const 
+    path = require('path'),
+    { lstatSync, readdirSync } = require('fs');
 
-function isDirectory(source, name) {
-    return fs.lstatSync(path.join(__dirname, '/..', source, name)).isDirectory();
-}
+const fs = {
+	isDirectory: (source, name) => {
+		return lstatSync(global.appRoot + source + name).isDirectory();
+	},
 
-function getDirectories(source) {
-    return fs.readdirSync(path.join(__dirname, '/..', source)).filter(name => isDirectory(source, name));
-}
+	getDirectories: source => {
+		return readdirSync(global.appRoot + source).filter(name => fs.isDirectory(source, name));
+	},
 
-function getRandomFileFromDirectory(dir, name) {
-    var files = fs.readdirSync(path.join(__dirname, '/..', dir, name));
+	getFiles: source => {
+        return readdirSync(global.appRoot + source).filter(name => !fs.isDirectory(source, name));
+    },
 
-    var random = files[Math.floor(Math.random() * files.length)];
+	getRandomFileFromDirectory: (path, name) => {
+		var files = readdirSync(global.appRoot + path + name);
 
-    return random;
-}
+		var random = files[Math.floor(Math.random() * files.length)];
 
-function getRandomAudioFileFromDirectory(dir, name) {
-    var files = fs.readdirSync(path.join(__dirname, '/..', dir, name));
-
-    var regexAudioFiles = RegExp('(wav|mp3)');
-
-    let filtered = files.filter(file => regexAudioFiles.test(file.split('.').pop()));
-
-    var random = filtered[Math.floor(Math.random() * filtered.length)];
-
-    return random;
-}
-
-module.exports = {
-	isDirectory,
-    getDirectories,
-    getRandomFileFromDirectory,
-    getRandomAudioFileFromDirectory
+		return random;
+	}
 };
+
+module.exports = fs;

@@ -1,14 +1,16 @@
 {
   "name": "discordbot",
   "version": "1.0.0",
-  "description": "Beep bot Discord bot!",
+  "description": "Discord bot with web soundboard",
   "main": "index.js",
+  "scripts": {
+    "dev": "export NODE_ENV=dev && nodemon .",
+    "vue": "export NODE_ENV=dev && npm run --prefix web/vue dev",
+    "vue-prod": "npm run --prefix web/vue build",
+    "prod": "export NODE_ENV=production && nodemon ."
+  },
   "author": "Mikkel O. Laursen",
   "license": "ISC",
-  "scripts": {
-    "start": "export NODE_ENV=production && forever start -l ~/beepbot/log.out -e ~/beepbot/err.out ~/beepbot/index.js",
-    "dev": "export NODE_ENV=dev && node ."
-  },
   "dependencies": {
     "@discordjs/uws": "^11.149.1",
     "body-parser": "^1.19.0",

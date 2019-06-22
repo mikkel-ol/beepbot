@@ -1,14 +1,14 @@
 const path = require('path');
 
 const ids = require(path.join(global.discordRoot, '/config/ids')).users,
-	volume = require(path.join(global.discordRoot, '/config/sound')).volume,
+	volume = require(path.join(global.discordRoot, '/config/sounds')).volume,
 	welcomes = require(path.join(global.discordRoot, '/config/messages')).welcome,
 	greetingsPath = '/assets/sounds/greetings/',
 	fs = require(path.join(global.appRoot, '/services/fs'));
 
 function newMember(member) {
 	// Random greeting
-	message = welcomes(member)[Math.floor(Math.random() * welcomes.length)];
+	let message = welcomes(member)[Math.floor(Math.random() * welcomes.length)];
 
 	if (!member.guild.available)
 		return console.error(`ERROR: Cannot greet new member on guild \"${member.guild.name}\". Guild unavailable`);

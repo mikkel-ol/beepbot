@@ -1,0 +1,189 @@
+.guild-container {
+  width: 50px;
+  height: 50px !important;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  line-height: 50px;
+  position: relative;
+}
+
+.guild {
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.guild:hover, #server-separator a:hover {
+	animation-name: guild-bounce;
+  animation-duration: .5s;
+  border-radius: 15px;
+}
+
+.guild-container .selected {
+  border-radius: 15px;
+}
+
+.guild-container .selected::before {
+  background: #fff;
+  border-radius: 20px;
+  height: 40px;
+  margin-top: -20px;
+  left: -15px;
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  content: "";
+  transition: height .25s ease-in-out, margin-top .25s ease-in-out;
+}
+
+.guild a {
+	color: #fff;
+	text-decoration: none;
+	background-repeat: no-repeat;
+  background-size: 50px 50px;
+  border-radius: 0;
+	margin: 0;
+	display: block;
+	width: 50px;
+	height: 50px;
+}
+
+#topbar {
+    height: 53px;
+    background: #36393d;
+    z-index: 1;
+}
+
+#server-name, #top-etc {
+  display: inline-block;
+  padding: 0 12px 0 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#top-etc {
+  background: inherit;
+  color: #72767d;
+}
+
+#server-name {
+  width: 264px;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#server-name span, #top-etc span {
+  line-height: 53px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#server-list {
+  background: #1f2124;
+  padding: 10px 0 10px 10px;
+  text-align: center;
+  position: relative;
+}
+
+#server-separator {
+  background: inherit;
+  height: 78px;
+}
+
+#server-separator a {
+  background-image: url('/img/add.jpg');
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  display: block;
+  border-radius: 50%;
+}
+
+#server-separator::after {
+  position: absolute;
+  background: #2f3136;
+  content: " ";
+  height: 2px;
+  left: 20%;
+  right: 20%;
+  top: 73px;
+}
+
+#sidebar span {
+  display: inline-block;
+  margin-bottom: 7px;
+}
+
+#sidebar .text-channel-category, #sidebar .voice-channel-category {
+  padding: 28px 0 10px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #72767d;
+}
+
+#sidebar .text-channel, .voice-channel a {
+  color: #72767d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 32px;
+  text-decoration: none;
+}
+
+.channel-entry {
+  padding-left: 15px;
+}
+
+.voice-channel, .text-channel {
+  display: flex;
+  align-items: center;
+}
+
+.voice-channel a:hover {
+  color: #fff;
+}
+
+#people-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#soundboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.button {
+  border: inset;
+  border-radius: 50%;
+
+  transition: all .05s linear
+}
+
+.button:active {
+	box-shadow: 2px 2px 2px #777;
+	transform: translateY(3px);
+}
+
+.soundbutton img {
+  width: 250px;
+	margin: 80px 30px 0;
+}
+
+.soundbutton {
+  background-color: #36393d !important;
+}
+
+
+@keyframes guild-bounce {
+  0%    { border-radius: 25px; }
+  60%   { border-radius: 10px; }
+  80%   { border-radius: 17px; }
+  90%   { border-radius: 14px; }
+  100%  { border-radius: 15px; }
+}

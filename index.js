@@ -2,9 +2,12 @@ const path = require('path');
 global.appRoot = path.resolve(__dirname);
 
 const 
-    Bot = require('./discord.js/main'),
-    Logger = require('./services/logger');
+    Bot = require('./discord.js'),
+    Logger = require('./services/logger'),
+    Express = require('./web/express');
 
 Logger();
 
-Bot.start();
+Bot.start().then(bot => {
+    Express.start(bot);
+})
