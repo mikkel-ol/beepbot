@@ -4,12 +4,9 @@ node_modules/
 # macOS
 .DS_Store
 
-# Keys
-*.pem
 
-# aws 
-aws.txt
-scp.txt
+# Secret stuff
+etc/
 
 # Photoshop files
 *.psd
