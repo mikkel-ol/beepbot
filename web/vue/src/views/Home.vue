@@ -12,13 +12,31 @@
     <div id="server-list">
       <div id="server-separator">
         <!-- Probably an "Add bot to your server link" -->
+        <div id="addBotButton" class="guild-container" @click="addBot">
+          <div class="guild button">
+            <svg
+              name="Nova_Add"
+              class="circleIcon-LvPL6c"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M21 11.001H13V3.00098H11V11.001H3V13.001H11V21.001H13V13.001H21V11.001Z"
+              ></path>
+            </svg>
+          </div>
+        </div>
       </div>
 
       <div v-if="servers" class="guild-container">
         <div v-for="(server, index) in servers" :key="server.id" class="guild-container">
-          <div class="guild">
-            <a v-html="generateAvatar(server)" @click='changeCurrentGuild(index)'></a>
-          </div>
+          <div
+            class="guild"
+            v-html="generateAvatar(server)"
+            @click="changeCurrentGuild(index, $event)"
+          ></div>
         </div>
       </div>
     </div>
@@ -69,10 +87,33 @@
                   d="M11.383 3.07904C11.009 2.92504 10.579 3.01004 10.293 3.29604L6 8.00204H3C2.45 8.00204 2 8.45304 2 9.00204V15.002C2 15.552 2.45 16.002 3 16.002H6L10.293 20.71C10.579 20.996 11.009 21.082 11.383 20.927C11.757 20.772 12 20.407 12 20.002V4.00204C12 3.59904 11.757 3.23204 11.383 3.07904ZM14 5.00195V7.00195C16.757 7.00195 19 9.24595 19 12.002C19 14.759 16.757 17.002 14 17.002V19.002C17.86 19.002 21 15.863 21 12.002C21 8.14295 17.86 5.00195 14 5.00195ZM14 9.00195C15.654 9.00195 17 10.349 17 12.002C17 13.657 15.654 15.002 14 15.002V13.002C14.551 13.002 15 12.553 15 12.002C15 11.451 14.551 11.002 14 11.002V9.00195Z"
                 ></path>
               </svg>
-              <a v-on:click="changeVoiceChannel(channel.id)" class="channel-entry">{{channel.name}}</a>
+              <a @click="changeVoiceChannel(channel.id)" class="channel-entry">{{channel.name}}</a>
             </div>
           </div>
         </div>
+      </div>
+      <div v-if="connected" id="connection-status-container">
+        <div id="connection-status-bars">
+          <!-- Ping hover effect (Client.ping) -->
+        </div>
+        <div id="connection-status-description"></div>
+        <button id="disconnect-button" v-on:click="stop()">
+          <svg
+            class="buttonIcon-3yYVOH"
+            name="Nova_CallLeave"
+            aria-hidden="false"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M21.1169 1.11603L22.8839 2.88403L19.7679 6.00003L22.8839 9.11603L21.1169 10.884L17.9999 7.76803L14.8839 10.884L13.1169 9.11603L16.2329 6.00003L13.1169 2.88403L14.8839 1.11603L17.9999 4.23203L21.1169 1.11603ZM18 22H13C6.925 22 2 17.075 2 11V6C2 5.447 2.448 5 3 5H7C7.553 5 8 5.447 8 6V10C8 10.553 7.553 11 7 11H6C6.063 14.938 9 18 13 18V17C13 16.447 13.447 16 14 16H18C18.553 16 19 16.447 19 17V21C19 21.553 18.553 22 18 22Z"
+            ></path>
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -80,7 +121,12 @@
       <div class="soundbutton">
         <div v-if="sounds">
           <div v-for="(sound, index) in sounds" :key="sound">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background: white; cursor: pointer; color: black; text-align: center;" v-on:click="play(sound)"><p style="padding-top: 8px;">{{index}}</p></div>
+            <div
+              style="width: 40px; height: 40px; border-radius: 50%; background: white; cursor: pointer; color: black; text-align: center;"
+              v-on:click="play(sound)"
+            >
+              <p style="padding-top: 8px;">{{index}}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -88,9 +134,6 @@
 
     <div id="people-list">
       <h2>WIP</h2>
-      <div v-if="current">
-        <button v-on:click="stop()">Stop</button>
-      </div>
     </div>
   </div>
 </template>
@@ -113,24 +156,43 @@ export default {
       sounds: null,
       servers: null,
       current: null,
-      temp: false
+      connected: false
     };
   },
   methods: {
+    addBot: function() {
+      window.location = "https://discordapp.com/oauth2/authorize?client_id=352214774479847435&scope=bot&permissions=8";
+    },
+
     changeVoiceChannel: function(channelId) {
+      // TODO: Handle error
       ApiService.changeVoiceChannel(this.current.id, channelId);
+      if (document.getElementById("selectedVoiceChannel"))
+        document.getElementById("selectedVoiceChannel").removeAttribute("id");
+      event.target.id = "selectedVoiceChannel";
+      this.connected = true;
     },
 
     changeCurrentGuild: function(index) {
       this.current = this.servers[index];
+      if (document.getElementById("selectedGuild"))
+        document.getElementById("selectedGuild").removeAttribute("id");
+      event.target.parentElement.id = "selectedGuild";
     },
 
     generateAvatar: function(server) {
       if (server.icon === null)
         // Get first three letters in server name
         // TODO: Handle if name is smaller than 3 words
-        return server.name.split(" ").reduce((response, word) => response += word.slice(0, 1), '').substr(0, 3).toUpperCase();
-      else return `<a style="background-image: url('https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp')"></a>`; 
+        return server.name
+          .split(" ")
+          .reduce((response, word) => (response += word.slice(0, 1)), "")
+          .substr(0, 3)
+          .toUpperCase();
+      else
+        return `<a style="background-image: url('https://cdn.discordapp.com/icons/${
+          server.id
+        }/${server.icon}.webp')"></a>`;
     },
 
     play: function(file) {
@@ -141,6 +203,9 @@ export default {
     stop: function() {
       // TODO: Handle "bot not playing"
       ApiService.stop();
+      if (document.getElementById("selectedVoiceChannel"))
+        document.getElementById("selectedVoiceChannel").removeAttribute("id");
+      this.connected = false;
     }
   },
   async mounted() {
@@ -154,9 +219,9 @@ export default {
 
     var res2 = await ApiService.getSounds().catch(err => {
       if (err.response.status === 401) this.$router.push("/login");
-    })
+    });
 
-    this.sounds = res2 ? res2.data : undefined;    
+    this.sounds = res2 ? res2.data : undefined;
   }
 };
 </script>
