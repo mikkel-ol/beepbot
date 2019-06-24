@@ -2,6 +2,7 @@
 global.expressRoot = global.appRoot + '/web/express';
 
 const https = require('https'),
+	http = require('http'),
 	fs = require('fs'),
 	Express = require('express'),
 	session = require('express-session'), // TODO: Save session data in mongo (leaks atm)
@@ -77,24 +78,40 @@ module.exports = {
 
 		server.use(Express.static(global.expressRoot + '/dist'));
 
-		if (process.env.NODE_ENV == 'production') {
-			https
-				.createServer(
-					{
-						key: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/privkey.pem'),
-						cert: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/cert.pem'),
-						ca: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/chain.pem')
-					},
-					server
-				)
-				.listen(config.port, () => {
-					console.log(messages.ready);
-				});
-		} else {
-			server.listen(config.port, () => {
-				console.log(messages.ready);
-			});
+		let webServer = undefined;
+
+		switch (process.env.NODE_ENV) {
+			case 'production':
+				const credentials = {
+					key: fs.readFileSync(config.cert.privatekey),
+					cert: fs.readFileSync(config.cert.certificate),
+					ca: fs.readFileSync(config.cert.authority)
+				};
+				webServer = https.createServer(credentials, server);
+
+				// Redirect HTTP to HTTPS
+				http
+					.createServer(function(req, res) {
+						res.writeHead(301, {
+							Location: 'https://' + req.headers['host'].replace(8080, config.port) + req.url
+						});
+						res.end();
+					})
+					.listen(8080);
+
+				break;
+
+			case 'dev':
+				webServer = http.createServer(server);
+				break;
+
+			default:
+				break;
 		}
+
+		webServer.listen(config.port, () => {
+			console.log(messages.ready);
+		});
 
 		return server;
 	}
