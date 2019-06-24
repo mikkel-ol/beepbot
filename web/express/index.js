@@ -1,8 +1,7 @@
 // Set express folder root
 global.expressRoot = global.appRoot + '/web/express';
 
-const 
-	https = require('https'),
+const https = require('https'),
 	fs = require('fs'),
 	Express = require('express'),
 	session = require('express-session'), // TODO: Save session data in mongo (leaks atm)
@@ -78,18 +77,24 @@ module.exports = {
 
 		server.use(Express.static(global.expressRoot + '/dist'));
 
-		https
-			.createServer(
-				{
-					key: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/privkey.pem'),
-					cert: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/cert.pem'),
-					ca: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/chain.pem')
-				},
-				server
-			)
-			.listen(config.port, () => {
+		if (process.env.NODE_ENV == 'production') {
+			https
+				.createServer(
+					{
+						key: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/privkey.pem'),
+						cert: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/cert.pem'),
+						ca: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/chain.pem')
+					},
+					server
+				)
+				.listen(config.port, () => {
+					console.log(messages.ready);
+				});
+		} else {
+			server.listen(config.port, () => {
 				console.log(messages.ready);
 			});
+		}
 
 		return server;
 	}
