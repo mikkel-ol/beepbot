@@ -1,7 +1,10 @@
 // Set express folder root
 global.expressRoot = global.appRoot + '/web/express';
 
-const Express = require('express'),
+const 
+	https = require('https'),
+	fs = require('fs'),
+	Express = require('express'),
 	session = require('express-session'), // TODO: Save session data in mongo (leaks atm)
 	server = Express(),
 	history = require('connect-history-api-fallback'),
@@ -18,7 +21,6 @@ const config = require('./config/app'),
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
-// TODO: Might need to setup session differently
 server.use(
 	session({
 		secret: secret,
@@ -54,7 +56,7 @@ module.exports = {
 				res.header('Access-Control-Allow-Origin', req.headers.origin);
 				res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 				res.header('Access-Control-Allow-Headers', 'Content-type,Accept,x-access-token,X-Key');
-				res.header("Access-Control-Allow-Credentials", "true");
+				res.header('Access-Control-Allow-Credentials', 'true');
 
 				if (req.method === 'OPTIONS') {
 					res.status(200).end();
@@ -76,9 +78,18 @@ module.exports = {
 
 		server.use(Express.static(global.expressRoot + '/dist'));
 
-		server.listen(config.port, () => {
-			console.log(messages.ready);
-		});
+		https
+			.createServer(
+				{
+					key: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/privkey.pem'),
+					cert: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/cert.pem'),
+					ca: fs.readFileSync('/etc/letsencrypt/live/beepbot.dk/chain.pem')
+				},
+				server
+			)
+			.listen(config.port, () => {
+				console.log(messages.ready);
+			});
 
 		return server;
 	}
