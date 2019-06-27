@@ -6,46 +6,52 @@ const ids = require(path.join(global.discordRoot, '/config/ids')).users,
 	greetingsPath = '/assets/sounds/greetings/',
 	fs = require(path.join(global.appRoot, '/services/fs'));
 
-function newMember(member) {
-	// Random greeting
-	let message = welcomes(member)[Math.floor(Math.random() * welcomes.length)];
+const greetings = {
+	newMember(member) {
+		// Random greeting
+		let message = welcomes(member)[Math.floor(Math.random() * welcomes.length)];
 
-	if (!member.guild.available)
-		return console.error(`ERROR: Cannot greet new member on guild \"${member.guild.name}\". Guild unavailable`);
-	
-	// TODO: Let users select which text channel to send to (web site)
-	member.guild.channels.filter((channel) => channel.type == 'text').first().send(message); // Send greeting to first text channel in guild
-}
+		if (!member.guild.available)
+			return console.error(`ERROR: Cannot greet new member on guild \"${member.guild.name}\". Guild unavailable`);
 
-function voiceChannelJoin(newMember) {
-	// Get array of all IDs
-	var idArr = Object.values(ids);
+		// TODO: Let users select which text channel to send to (web site)
+		member.guild.channels.filter((channel) => channel.type == 'text').first().send(message); // Send greeting to first text channel in guild
+	},
 
-	// If user is in array
-	if (idArr.includes(parseInt(newMember.id))) {
-		const dirs = fs.getDirectories(greetingsPath);
-		const dir = dirs.find((currentDir) => currentDir == newMember.id);
-		
-		// If new member does not have greetings, return
-		if (dir == undefined) return;
+	voiceChannelJoin(newMember) {
+		// Get array of all IDs
+		var idArr = Object.values(ids);
 
-		newMember.voiceChannel.join()
-			.then((connection) => {
-				const file = fs.getRandomFileFromDirectory(greetingsPath, dir);
-				const fullPath = __dirname + '/../..' + greetingsPath + newMember.id + '/' + file;
+		// If user is in array
+		if (idArr.includes(parseInt(newMember.id))) {
+			const dirs = fs.getDirectories(greetingsPath);
+			const dir = dirs.find((currentDir) => currentDir == newMember.id);
 
-				newMember.setMute(true);
+			// If new member does not have greetings, return
+			if (dir == undefined) return;
 
-				const dispatcher = connection.playFile(fullPath);
-				dispatcher.setVolumeLogarithmic(volume);
+			newMember.voiceChannel
+				.join()
+				.then((connection) => {
+					const file = fs.getRandomFileFromDirectory(greetingsPath, dir);
+					const fullPath = __dirname + '/../..' + greetingsPath + newMember.id + '/' + file;
 
-				dispatcher.on('end', (reason) => newMember.setMute(false));
-			})
-			.catch(console.log);
+					newMember.setMute(true);
+
+					const dispatcher = connection.playFile(fullPath);
+					dispatcher.setVolumeLogarithmic(volume);
+
+					dispatcher.on('end', (reason) => newMember.setMute(false));
+				})
+				.catch(console.log);
+		}
+	},
+
+	voiceChannelLeft(oldMember) {
+		oldMember.voiceChannel.join().then((connection) => {
+			connection.playFile(path.join(global.appRoot, greetingsPath, '/disconnected.wav')).setVolumeLogarithmic(volume-.4);
+		});
 	}
-}
-
-module.exports = {
-	newMember,
-	voiceChannelJoin
 };
+
+module.exports = greetings;

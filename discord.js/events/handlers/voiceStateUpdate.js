@@ -4,9 +4,17 @@ const greetings = require(path.join(global.discordRoot, '/helpers/greeting'));
 
 module.exports = (bot) => {
 	bot.on('voiceStateUpdate', (oldMember, newMember) => {
+		// Ignore bot voice state update
+		if (oldMember.user.bot) return;
+
 		// Play sound when the boys join a channel (and they were not in one before)
-		if (oldMember.voiceChannel === undefined && newMember.voiceChannel !== undefined)
+		else if (oldMember.voiceChannel === undefined && newMember.voiceChannel !== undefined)
 			return greetings.voiceChannelJoin(newMember);
+
+		// User left channel
+		else if (oldMember.voiceChannel != newMember.voiceChannel && oldMember.voiceChannel.members.size > 0) {
+			return greetings.voiceChannelLeft(oldMember);
+		}
 
 		// Leave voice channel if bot is last one there
 		else if (
