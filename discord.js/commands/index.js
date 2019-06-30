@@ -4,7 +4,8 @@ module.exports = (bot) => {
 		[ 'random', 'Random' ],
 		[ 'say', 'Say' ],
 		[ 'control', 'Control' ],
-		[ 'poll', 'Poll' ]
+		[ 'poll', 'Poll' ],
+		[ 'test', 'Test' ]
 	]);
 
 	// Where are my commands?!

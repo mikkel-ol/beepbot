@@ -9,12 +9,13 @@ const ids = require(path.join(global.discordRoot, '/config/ids')).users,
 const greetings = {
 	newMember(member) {
 		// Random greeting
-		let message = welcomes(member)[Math.floor(Math.random() * welcomes.length)];
+		let messages = welcomes(member);
+		let message = [Math.floor(Math.random() * messages.length)];
 
 		if (!member.guild.available)
 			return console.error(`ERROR: Cannot greet new member on guild \"${member.guild.name}\". Guild unavailable`);
 
-		// TODO: Let users select which text channel to send to (web site)
+		// TODO: Let users select which text channel to send to (website)
 		member.guild.channels.filter((channel) => channel.type == 'text').first().send(message); // Send greeting to first text channel in guild
 	},
 
