@@ -4,7 +4,7 @@ global.appRoot = path.resolve(__dirname);
 const 
     Bot = require('./discord.js'),
     Logger = require('./services/logger'),
-    Express = require('./web/express');
+    Express = require('./express');
 
 Logger();
 
