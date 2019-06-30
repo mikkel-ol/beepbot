@@ -1,5 +1,5 @@
 // Set express folder root
-global.expressRoot = global.appRoot + '/web/express';
+global.expressRoot = global.appRoot + '/express';
 
 const path = require('path');
 
