@@ -1,7 +1,7 @@
 const path = require('path');
 
 const mongo = require('mongodb').MongoClient,
-	settings = require(path.join(global.discordRoot, '/config/database')),
+	settings = require(path.join(global.appRoot, '/database/config')),
 	url = settings.url,
 	name = settings.name,
 	collectionName = 'servers';

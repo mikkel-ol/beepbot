@@ -1,6 +1,8 @@
 // Set express folder root
 global.expressRoot = global.appRoot + '/web/express';
 
+const path = require('path');
+
 const https = require('https'),
 	http = require('http'),
 	fs = require('fs'),
@@ -9,7 +11,8 @@ const https = require('https'),
 	server = Express(),
 	history = require('connect-history-api-fallback'),
 	bodyParser = require('body-parser'),
-	expressValidator = require('express-validator');
+	expressValidator = require('express-validator'),
+	MongoStore = require('connect-mongo')(session);
 
 const config = require('./config/app'),
 	secret = require('./config/secret'),
@@ -25,7 +28,8 @@ server.use(
 	session({
 		secret: secret,
 		saveUninitialized: false,
-		resave: false
+		resave: false,
+		store: new MongoStore({ url: require(path.join(global.appRoot, '/database/config')).url + '/session'})
 	})
 );
 
