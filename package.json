@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "export NODE_ENV=dev && nodemon .",
-    "vue": "export NODE_ENV=dev && npm run --prefix web/vue dev",
-    "vue-prod": "npm run --prefix web/vue build",
+    "vue": "export NODE_ENV=dev && npm run --prefix vue dev",
+    "vue-prod": "npm run --prefix vue build",
     "prod": "export NODE_ENV=production && nodemon ."
   },
   "author": "Mikkel O. Laursen",
