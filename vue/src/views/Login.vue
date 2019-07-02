@@ -30,10 +30,7 @@ export default {
 
 //! This is shit..
 function init() {
-  // Loading animation
-  setTimeout(() => {
-    $(".sk-circle").removeClass("fadeIn");
-    $(".sk-circle").addClass("fadeOut");
+
 
     // Show front container after 1s
     setTimeout(() => {
@@ -53,7 +50,6 @@ function init() {
         }, /*500*/5);
       }, /*1500*/15);
     }, /*1000*/10);
-  }, /*1500*/15);
 
   // Click animation for logo
   $("#logo").click(() => {

@@ -10,7 +10,7 @@ const greetings = {
 	newMember(member) {
 		// Random greeting
 		let messages = welcomes(member);
-		let message = [Math.floor(Math.random() * messages.length)];
+		let message = messages[Math.floor(Math.random() * messages.length)];
 
 		if (!member.guild.available)
 			return console.error(`ERROR: Cannot greet new member on guild \"${member.guild.name}\". Guild unavailable`);
