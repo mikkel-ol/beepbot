@@ -5,13 +5,12 @@
         <span v-if="current">{{current.name}}</span>
       </div>
       <div id="top-etc">
-        <span>Send nudes</span>
+        <span>Soundboard</span>
       </div>
     </div>
 
     <div id="server-list">
       <div id="server-separator">
-        <!-- Probably an "Add bot to your server link" -->
         <div id="addBotButton" class="guild-container" @click="addBot">
           <div class="guild button">
             <svg
@@ -119,15 +118,10 @@
 
     <div id="soundboard">
       <div class="soundbutton">
-        <div v-if="sounds">
-          <div v-for="(sound, index) in sounds" :key="sound">
-            <div
-              style="width: 40px; height: 40px; border-radius: 50%; background: white; cursor: pointer; color: black; text-align: center;"
-              v-on:click="play(sound)"
-            >
-              <p style="padding-top: 8px;">{{index}}</p>
-            </div>
-          </div>
+        <div v-if="sounds" id="soundboard-container">
+          <s-button v-for="(sound, index) in sounds" :key="sound">
+            <a v-on:click="play(sound)" class="btn-two red rounded">{{index}}</a>
+          </s-button>
         </div>
       </div>
     </div>
