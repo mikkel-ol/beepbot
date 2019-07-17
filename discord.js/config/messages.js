@@ -17,9 +17,7 @@ module.exports = {
 	ninegag: [ 'Memes!', 'Dank!', 'Haha!', 'Not funny..' ],
 	welcome: (member) => [
 		`Hvem har lukket **${member.displayName}** ind?? Nå, hej!`,
-		`When I say **${member.displayName}**, you say?`,
 		`Er det et flyyyyy, nej det' **${member.displayName}** Stabil!`,
-		`Wadu hek? **${member.displayName}** hek!`,
 		`AND HIS NAME IS **JOHN ${member.displayName}**!`,
 		`**${member.displayName}**? Det' ham der, der er på den båååd der!`
 	],
