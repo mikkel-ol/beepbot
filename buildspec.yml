@@ -8,7 +8,6 @@ phases:
   build:
     commands:
       - npm run vue-prod
-      - npm run prod
 artifacts:
   files:
     - '**/*'
