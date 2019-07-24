@@ -1,0 +1,28 @@
+version: 0.1
+os: linux
+files:
+    - source: /
+      destination: /home/ubuntu/beepbot
+permissions:
+  #  - object: /var/www/html
+  #    pattern: "**"
+  #    owner: apache
+  #    group: apache
+  #    mode: 755
+  #    type:
+  #      - file
+hooks:
+  #  BeforeInstall:
+  #   - location: scripts/before.sh
+  #     timeout: 300
+  #     runas: ubuntu
+
+  AfterInstall:
+    - location: scripts/after.sh
+      timeout: 300
+      runas: ubuntu
+
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 300
+      runas: ubuntu
