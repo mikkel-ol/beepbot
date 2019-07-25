@@ -119,9 +119,9 @@
     <div id="soundboard">
       <div class="soundbutton">
         <div v-if="sounds" id="soundboard-container">
-          <s-button v-for="(sound, index) in sounds" :key="sound">
+          <div v-for="(sound, index) in sounds" :key="sound">
             <a v-on:click="play(sound)" class="btn-two red rounded">{{index}}</a>
-          </s-button>
+          </div>
         </div>
       </div>
     </div>
