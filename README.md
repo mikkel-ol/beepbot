@@ -7,7 +7,9 @@ A Discord bot with the following features:
 * Dynamic change of voice channel names
 * Dynamic change of bot status
 
-<a href="https://discordapp.com/api/oauth2/authorize?client_id=356076982846488579&permissions=3221504&scope=bot">Add the bot to your server here!</a>
+<a href="https://discordapp.com/api/oauth2/authorize?client_id=352214774479847435&permissions=8&scope=bot">Add the bot to your server here!</a>
+
+**For now the bot is getting full control of server. At a later time the correct permissions will be calculated**
 
 ### Administration
 
