@@ -87,6 +87,7 @@
                     d="M11.383 3.07904C11.009 2.92504 10.579 3.01004 10.293 3.29604L6 8.00204H3C2.45 8.00204 2 8.45304 2 9.00204V15.002C2 15.552 2.45 16.002 3 16.002H6L10.293 20.71C10.579 20.996 11.009 21.082 11.383 20.927C11.757 20.772 12 20.407 12 20.002V4.00204C12 3.59904 11.757 3.23204 11.383 3.07904ZM14 5.00195V7.00195C16.757 7.00195 19 9.24595 19 12.002C19 14.759 16.757 17.002 14 17.002V19.002C17.86 19.002 21 15.863 21 12.002C21 8.14295 17.86 5.00195 14 5.00195ZM14 9.00195C15.654 9.00195 17 10.349 17 12.002C17 13.657 15.654 15.002 14 15.002V13.002C14.551 13.002 15 12.553 15 12.002C15 11.451 14.551 11.002 14 11.002V9.00195Z"
                   />
                 </svg>
+                <!-- TODO: Set ID dynamically based on active status on voice channel ( :id="function" ) -->
                 <a @click="changeVoiceChannel(channel.id)" class="channel-entry">{{channel.name}}</a>
               </div>
             </div>
@@ -197,11 +198,11 @@ export default {
       if (server.icon === null)
         // Get first three letters in server name
         // TODO: Handle if name is smaller than 3 words
-        return server.name
+        return `<div>${server.name
           .split(" ")
           .reduce((response, word) => (response += word.slice(0, 1)), "")
           .substr(0, 3)
-          .toUpperCase();
+          .toUpperCase()}</div>`;
       else
         return `<a style="background-image: url('https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp')"></a>`;
     },
@@ -224,7 +225,8 @@ export default {
     }
   },
   async mounted() {
-    var res1 = await ApiService.getServers().catch(err => {
+
+var res1 = await ApiService.getServers().catch(err => {
       if (err.response.status === 401) this.$router.push("/login");
     });
     this.servers = res1 ? res1.data : undefined;
@@ -232,17 +234,36 @@ export default {
     // TODO: Save current server in Vuex
     this.current = this.servers ? this.servers[0] : undefined;
 
+
     var res2 = await ApiService.getSounds().catch(err => {
       if (err.response.status === 401) this.$router.push("/login");
     });
 
     this.sounds = res2 ? res2.data : undefined;
 
+
     var res3 = await ApiService.getUser().catch(err => {
       if (err.response.status === 401) this.$router.push("/login");
     });
 
     this.user = res3 ? res3.data : undefined;
+
+
+    var res4 = await ApiService.getVoiceConnections().catch(err => {
+      if (err.response.status === 401) this.$router.push("/login");
+    });
+
+    if (res4.data) {
+      res4.data.forEach(voiceConnection => {
+        this.servers.forEach(server => {
+          if (voiceConnection.guild === server.id) {
+            server.channels.forEach(channel => {
+              if (channel.id === voiceConnection.channel) channel.active = true;
+            });
+          }
+        });
+      });
+    }
   }
 };
 </script>
