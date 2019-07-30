@@ -15,7 +15,7 @@ const https = require('https'),
 	MongoStore = require('connect-mongo')(session);
 
 const config = require('./config/app'),
-	secret = require('./config/secret'),
+	secret = require(path.join(global.discordRoot, '/config/secret')),
 	messages = require('./config/messages'),
 	passport = require('./passport'),
 	api = require('./api'),
