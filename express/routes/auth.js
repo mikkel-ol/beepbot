@@ -32,7 +32,7 @@ module.exports = () => {
 
 	router.get('/logout', (req, res) => {
 		req.logout();
-		res.redirect('/');
+		res.sendStatus(200);
 	});
 
 	return router;

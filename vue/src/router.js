@@ -5,6 +5,7 @@ import Home from './views/Home.vue';
 import Login from './views/Login.vue';
 import Error from './views/Error.vue';
 
+
 Vue.use(Router);
 
 export default new Router({
@@ -23,6 +24,18 @@ export default new Router({
 			path: '/login',
 			name: 'login',
 			component: Login
+		},
+		{
+			path: '/logout',
+			beforeEnter(to, from, next) {
+				Vue.axios.create({withCredentials: true}).get(`${process.env.VUE_APP_HOST}/auth/logout`)
+					.then(res => {
+						next('/login');
+					})
+					.catch(err => {
+						console.error(err);
+					});
+			}
 		},
 		{
 			path: '/error',

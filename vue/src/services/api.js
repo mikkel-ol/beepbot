@@ -5,9 +5,11 @@ const baseUrl = `${process.env.VUE_APP_API_HOST}`;
 const urls = {
 	sounds: `${baseUrl}/sounds`,
 	servers: `${baseUrl}/servers`,
+	user: `${baseUrl}/user`,
+	voiceConnections: `${baseUrl}/voiceconnections`,
 	voiceChannels: `${baseUrl}/soundboards/voicechannel`,
 	playSound: `${baseUrl}/soundboards/play`,
-	stopPlaying: `${baseUrl}/soundboards/stop`
+	stopPlaying: `${baseUrl}/soundboards/stop`,
 };
 
 const ApiService = {
@@ -17,6 +19,14 @@ const ApiService = {
 
 	async getServers() {
 		return await Vue.axios.create({withCredentials: true}).get(urls.servers);
+	},
+
+	async getUser() {
+		return await Vue.axios.create({withCredentials: true}).get(urls.user);
+	},
+
+	async getVoiceConnections() {
+		return await Vue.axios.create({withCredentials: true}).get(urls.voiceConnections);
 	},
 
 	changeVoiceChannel(serverId, channelId) {

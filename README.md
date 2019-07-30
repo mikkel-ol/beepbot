@@ -26,4 +26,3 @@ The following libraries and technologies deserves mentioning:
 <a href="https://vuejs.org"><img src="https://vuejs.org/images/icons/favicon-32x32.png" alt="" width="14px" height="14px"> Vue.js</a> - website framework
 
 <a href="https://nodejs.org/"><img src="https://nodejs.org/static/favicon.png" alt="" width="14px" height="14px"> Node.js</a> - runtime of application
-
