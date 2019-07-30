@@ -10,8 +10,8 @@ switch (process.env.NODE_ENV) {
         break;
     
     case "dev":
-        callbackUrl = "http://localhost:8080/auth/callback";
-        redirectUrl = "http://localhost:8080/";
+        callbackUrl = "http://localhost:8081/auth/callback";
+        redirectUrl = "http://localhost:8081/";
         port = 8080;
         break;
     
