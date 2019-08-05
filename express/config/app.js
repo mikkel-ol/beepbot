@@ -27,8 +27,8 @@ module.exports = {
         redirect: redirectUrl
     },
     cert: {
-        privatekey: "/etc/letsencrypt/live/beepbot.dk/privkey.pem",
-        certificate: "/etc/letsencrypt/live/beepbot.dk/cert.pem",
-        authority: "/etc/letsencrypt/live/beepbot.dk/chain.pem"
+        privatekey: "/home/ubuntu/letsencrypt/live/beepbot.dk/privkey.pem",
+        certificate: "/home/ubuntu/letsencrypt/live/beepbot.dk/cert.pem",
+        authority: "/home/ubuntu/letsencrypt/live/beepbot.dk/chain.pem"
     }
 }

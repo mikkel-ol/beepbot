@@ -16,3 +16,6 @@ token.js
 
 # Client secret
 secret.js
+
+# AWS config
+.aws/
