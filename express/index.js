@@ -86,22 +86,25 @@ module.exports = {
 
 		switch (process.env.NODE_ENV) {
 			case 'production':
-				const credentials = {
-					key: fs.readFileSync(config.cert.privatekey),
-					cert: fs.readFileSync(config.cert.certificate),
-					ca: fs.readFileSync(config.cert.authority)
-				};
-				webServer = https.createServer(credentials, server);
+				// ! TEMP - DUE TO CERTBOT LIMITS
+				// const credentials = {
+				// 	key: fs.readFileSync(config.cert.privatekey),
+				// 	cert: fs.readFileSync(config.cert.certificate),
+				// 	ca: fs.readFileSync(config.cert.authority)
+				// };
+				// webServer = https.createServer(credentials, server);
 
-				// Redirect HTTP to HTTPS
-				http
-					.createServer(function(req, res) {
-						res.writeHead(301, {
-							Location: 'https://' + req.headers['host'].replace(8080, config.port) + req.url
-						});
-						res.end();
-					})
-					.listen(8080);
+				// // Redirect HTTP to HTTPS
+				// http
+				// 	.createServer(function(req, res) {
+				// 		res.writeHead(301, {
+				// 			Location: 'https://' + req.headers['host'].replace(8080, config.port) + req.url
+				// 		});
+				// 		res.end();
+				// 	})
+				// 	.listen(8080);
+
+				webServer = http.createServer(server);
 
 				break;
 
