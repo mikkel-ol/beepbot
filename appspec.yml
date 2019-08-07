@@ -3,14 +3,19 @@ os: linux
 files:
     - source: /
       destination: /home/ubuntu/beepbot
+
 permissions:
-  #  - object: /var/www/html
-  #    pattern: "**"
-  #    owner: apache
-  #    group: apache
-  #    mode: 755
-  #    type:
-  #      - file
+  - object: /home/ubuntu
+    pattern: beepbot
+    owner: ubuntu
+    group: ubuntu
+    mode: 771
+
+  - object: /home/ubuntu/beepbot
+    owner: ubuntu
+    group: ubuntu
+    mode: 771
+    
 hooks:
   #  BeforeInstall:
   #   - location: scripts/before.sh
