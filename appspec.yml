@@ -17,7 +17,7 @@ permissions:
     mode: 771
 
 hooks:
-   BeforeInstall:
+  BeforeInstall:
     - location: scripts/before.sh
       timeout: 300
       runas: ubuntu
