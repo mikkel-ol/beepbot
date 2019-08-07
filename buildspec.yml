@@ -3,7 +3,7 @@ version: 0.1
 phases:
   install:
     commands:
-      - npm install
+      #- npm install
       - cd vue && npm install
   build:
     commands:

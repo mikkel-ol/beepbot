@@ -15,7 +15,7 @@ permissions:
     owner: ubuntu
     group: ubuntu
     mode: 771
-    
+
 hooks:
   #  BeforeInstall:
   #   - location: scripts/before.sh
