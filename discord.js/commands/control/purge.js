@@ -17,7 +17,7 @@ class PurgeCommand extends commando.Command {
 
 	async run(message, args) {
 		// TODO: Set role ID's dynamically
-		if (!message.member.roles.has("589093915395620898")) 
+		if (!message.member.roles.has("589500273567989760")) 
 			return message.channel.send(messages.permissions.missing);
 
 		var count = 5;

@@ -21,7 +21,7 @@ module.exports = {
 		`AND HIS NAME IS **JOHN ${member.displayName}**!`,
 		`**${member.displayName}**? Det' ham der, der er på den båååd der!`
 	],
-	permission: {
+	permissions: {
 		missing: 'You do not have permissions to do that'
 	},
 	success: `✅`,
