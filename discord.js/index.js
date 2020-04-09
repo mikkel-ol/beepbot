@@ -7,7 +7,7 @@ const Discord = require('discord.js-commando'),
 	bot = new Discord.Client(),
 	commands = require('./commands'),
 	events = require('./events'),
-	token = require('./token'),
+	token = process.env.BEEPBOT_TOKEN,
 	fs = require('fs');
 
 module.exports = {

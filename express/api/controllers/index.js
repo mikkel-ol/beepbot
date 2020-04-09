@@ -1,5 +1,6 @@
 const express = require('express');
 
+const auth = require("./auth");
 const sounds = require('./sounds');
 const servers = require('./servers');
 const soundboards = require('./soundboards/');
@@ -9,6 +10,7 @@ const voiceConnections = require('./voiceConnections');
 module.exports = (bot) => {
     const router = express.Router();
 
+	router.use("/auth", auth());
 	router.use('/sounds', sounds(bot));
 	router.use('/servers', servers(bot));
 	router.use('/soundboards', soundboards(bot));

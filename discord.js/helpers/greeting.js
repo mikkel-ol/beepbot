@@ -24,7 +24,7 @@ const greetings = {
 		var idArr = Object.values(ids);
 
 		// If user is in array
-		if (idArr.includes(parseInt(newMember.id))) {
+		if (idArr.includes(newMember.id)) {
 			const dirs = fs.getDirectories(greetingsPath);
 			const dir = dirs.find((currentDir) => currentDir == newMember.id);
 

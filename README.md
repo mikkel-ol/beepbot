@@ -17,6 +17,12 @@ The bot is controlled on the website. An admin panel is accessible to the user w
 
 Users can upload a sound clip to be added to the soundboard which must then be approved by an admin. Furthermore they can upload a sound clip __directly__ as a voice greeting when they join a voice channel.
 
+## Running it yourself
+
+The following environment variables need to be set:
+
+* `BEEPBOT_TOKEN` - [Discord bot token](link-to-discord-bot-page)
+
 ## Credits
 
 The following libraries and technologies deserves mentioning:
