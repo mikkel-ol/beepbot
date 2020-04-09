@@ -21,8 +21,8 @@ Users can upload a sound clip to be added to the soundboard which must then be a
 
 The following libraries and technologies deserves mentioning:
 
-<a href="https://discord.js.org"><img src="https://discord.js.org/static/favicon.ico" alt="" width="14px" height="14px"> Discord.js</a> - used to interact with the Discord API
+<a href="https://discord.js.org"><img src="https://discord.js.org/favicon.ico" alt="" width="14px" height="14px"> Discord.js</a> - used to interact with the Discord API
 
 <a href="https://vuejs.org"><img src="https://vuejs.org/images/icons/favicon-32x32.png" alt="" width="14px" height="14px"> Vue.js</a> - website framework
 
-<a href="https://nodejs.org/"><img src="https://nodejs.org/static/favicon.png" alt="" width="14px" height="14px"> Node.js</a> - runtime of application
+<a href="https://nodejs.org/"><img src="https://nodejs.org/static/images/favicons/favicon-32x32.png" alt="" width="14px" height="14px"> Node.js</a> - runtime of application
