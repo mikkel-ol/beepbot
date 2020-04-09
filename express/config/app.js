@@ -21,14 +21,13 @@ switch (process.env.NODE_ENV) {
 }
 
 module.exports = {
-    port: port,
-    url: {
-        callback: callbackUrl,
-        redirect: redirectUrl
-    },
-    cert: {
-        privatekey: "/home/ubuntu/letsencrypt/live/beepbot.dk/privkey.pem",
-        certificate: "/home/ubuntu/letsencrypt/live/beepbot.dk/cert.pem",
-        authority: "/home/ubuntu/letsencrypt/live/beepbot.dk/chain.pem"
-    }
-}
+  port: port,
+  url: {
+    callback: callbackUrl,
+    redirect: redirectUrl,
+  },
+  cert: {
+    privatekey: "/etc/letsencrypt/live/api.beepbot.dk/privkey.pem",
+    certificate: "/etc/letsencrypt/live/api.beepbot.dk/fullchain.pem",
+  },
+};

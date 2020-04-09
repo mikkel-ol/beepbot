@@ -89,7 +89,6 @@ module.exports = {
 				const credentials = {
 					key: fs.readFileSync(config.cert.privatekey),
 					cert: fs.readFileSync(config.cert.certificate),
-					ca: fs.readFileSync(config.cert.authority)
 				};
 				webServer = https.createServer(credentials, server);
 

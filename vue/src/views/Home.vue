@@ -88,7 +88,11 @@
                   />
                 </svg>
                 <!-- TODO: Set ID dynamically based on active status on voice channel ( :id="function" ) -->
-                <a @click="changeVoiceChannel(channel.id)" class="channel-entry">{{channel.name}}</a>
+                <a
+                  @click="changeVoiceChannel(channel.id)"
+                  class="channel-entry"
+                  :id="channel.active ? 'selectedVoiceChannel' : ''"
+                >{{channel.name}}</a>
               </div>
             </div>
           </div>
@@ -225,8 +229,8 @@ export default {
     }
   },
   async mounted() {
-
-var res1 = await ApiService.getServers().catch(err => {
+    
+    var res1 = await ApiService.getServers().catch(err => {
       if (err.response.status === 401) this.$router.push("/login");
     });
     this.servers = res1 ? res1.data : undefined;
@@ -234,13 +238,11 @@ var res1 = await ApiService.getServers().catch(err => {
     // TODO: Save current server in Vuex
     this.current = this.servers ? this.servers[0] : undefined;
 
-
     var res2 = await ApiService.getSounds().catch(err => {
       if (err.response.status === 401) this.$router.push("/login");
     });
 
     this.sounds = res2 ? res2.data : undefined;
-
 
     var res3 = await ApiService.getUser().catch(err => {
       if (err.response.status === 401) this.$router.push("/login");
@@ -248,15 +250,16 @@ var res1 = await ApiService.getServers().catch(err => {
 
     this.user = res3 ? res3.data : undefined;
 
-
     var res4 = await ApiService.getVoiceConnections().catch(err => {
       if (err.response.status === 401) this.$router.push("/login");
     });
 
+    if (res4.data.length > 0) this.connected = true;
+
     if (res4.data) {
       res4.data.forEach(voiceConnection => {
         this.servers.forEach(server => {
-          if (voiceConnection.guild === server.id) {
+          if (voiceConnection.guild === server.id) {
             server.channels.forEach(channel => {
               if (channel.id === voiceConnection.channel) channel.active = true;
             });
