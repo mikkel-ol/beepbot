@@ -31,10 +31,10 @@ module.exports = (bot) => {
 			return newMember.voiceChannel.join();
 			
         // User left channel
-        else if (
-            oldMember.voiceChannel != newMember.voiceChannel &&
-            oldMember.voiceChannel.members.size > 0
-        )
-            return greetings.voiceChannelLeft(oldMember);
+        // else if (
+        //     oldMember.voiceChannel != newMember.voiceChannel &&
+        //     oldMember.voiceChannel.members.size > 0
+        // )
+        //     return greetings.voiceChannelLeft(oldMember);
     });
 };
