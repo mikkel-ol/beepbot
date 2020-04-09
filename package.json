@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "export NODE_ENV=dev && nodemon .",
-    "vue": "export NODE_ENV=dev && npm run --prefix vue dev",
-    "vue-prod": "npm run --prefix vue build",
     "prod": "export NODE_ENV=production && nodemon ."
   },
   "author": "Mikkel O. Laursen",
@@ -36,8 +34,6 @@
     "python": "0.0.4",
     "request": "^2.88.0",
     "tar.gz": "^1.0.7",
-    "vue": "^2.6.10",
-    "vue-session": "^1.0.0",
     "zlib-sync": "^0.1.4"
   },
   "devDependencies": {}
