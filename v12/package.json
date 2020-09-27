@@ -1,0 +1,15 @@
+{
+  "name": "beepbot",
+  "version": "0.0.1",
+  "description": "Discord bot with soundboard",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "^0.1.0",
+    "chalk": "^4.0.0",
+    "console-stamp": "^0.2.9",
+    "discord.js": "^12.1.1"
+  }
+}
