@@ -1,0 +1,59 @@
+@import "theme.scss";
+@include mat-core();
+@include angular-material-theme($theme);
+
+@font-face {
+  font-family: Whitney;
+  src: url(assets/fonts/whitney300.woff) format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Whitney;
+  src: url(assets/fonts/whitney400.woff) format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Whitney;
+  src: url(assets/fonts/whitney500.woff) format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Whitney;
+  src: url(assets/fonts/whitney600.woff) format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Whitney;
+  src: url(assets/fonts/whitney700.woff) format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  font-family: "Whitney", "arial", sans-serif;
+}
+
+html,
+body {
+  color: white;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

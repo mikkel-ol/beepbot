@@ -1,0 +1,25 @@
+<mat-sidenav-container color="primary" class="app-sidenav-container">
+  <mat-sidenav
+    #sidenav
+    class="app-sidenav mat-elevation-z16"
+    mode="side"
+    [opened]="!isSmallScreen"
+    [mode]="isSmallScreen ? 'over' : 'side'"
+  >
+    <app-nav-header></app-nav-header>
+    <app-nav-content></app-nav-content>
+  </mat-sidenav>
+
+  <div fxLayout="column" style="height: 100%">
+    <app-header
+      [isSmallScreen]="isSmallScreen"
+      (toggleSidenav)="sidenav.toggle()"
+    ></app-header>
+    <div class="content">
+      <div class="router-content">
+        <router-outlet></router-outlet>
+      </div>
+      <!-- <app-footer class="footer"></app-footer> -->
+    </div>
+  </div>
+</mat-sidenav-container>

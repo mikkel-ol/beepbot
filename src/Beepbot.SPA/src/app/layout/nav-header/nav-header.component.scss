@@ -1,0 +1,12 @@
+@import "../../../theme.scss";
+
+mat-toolbar {
+  background: $bg-dark;
+
+  img {
+    width: 42px;
+    margin-right: 20px;
+  }
+
+  font-weight: 600;
+}

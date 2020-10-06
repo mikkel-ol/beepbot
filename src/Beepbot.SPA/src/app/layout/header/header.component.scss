@@ -1,0 +1,40 @@
+@import "../../../theme.scss";
+
+mat-toolbar {
+  background: $bg-medium;
+}
+
+.padding-right {
+  padding-right: 8px;
+}
+
+.menu-button {
+  padding: 6px 16px;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 32px;
+}
+
+.img-big {
+  margin-right: 12px;
+}
+
+.menu-button-small {
+  line-height: 16px;
+}
+
+.username {
+  align-items: baseline;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.discriminator {
+  color: #b6b7ba;
+  font-size: .9rem;
+}

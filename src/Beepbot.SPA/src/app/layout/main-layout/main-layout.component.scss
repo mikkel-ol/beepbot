@@ -1,0 +1,43 @@
+@import '~@angular/material/theming';
+@import '../../../theme.scss';
+
+$background: map-get($theme, background);
+
+.app-sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+mat-sidenav {
+  background: $bg-dark;
+}
+
+.app-sidenav {
+  width: 240px;
+  border: transparent;
+  @include mat-elevation(6);
+}
+
+:host ::ng-deep .mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.router-content {
+  flex: 1 0 auto;
+  padding: 16px;
+}
+
+.footer {
+  flex-shrink: 0;
+}

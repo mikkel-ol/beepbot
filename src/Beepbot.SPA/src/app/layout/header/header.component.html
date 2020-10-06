@@ -1,0 +1,36 @@
+<mat-toolbar>
+  <button *ngIf="isSmallScreen" mat-icon-button (click)="toggleSidenav.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div [fxLayoutAlign]="isSmallScreen ? 'center center' : 'start center'" fxFlex="1 1 auto">
+  </div>
+
+  <div *ngIf="isSmallScreen; else account_btn_with_text">
+    <button
+      class="menu-button-small"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+    >
+      <img class="avatar img-small" src="{{ avatarUrl }}" alt="" />
+    </button>
+  </div>
+
+  <ng-template #account_btn_with_text>
+    <button class="menu-button" mat-button [matMenuTriggerFor]="menu">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <img class="avatar img-big" src="{{ avatarUrl }}" alt="" />
+        <div fxLayout="row" class="username">
+          <div class="name">{{ name }}</div>
+          <div class="discriminator">{{ discriminator }}</div>
+        </div>
+      </div>
+    </button>
+  </ng-template>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="handleSignout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Log out</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

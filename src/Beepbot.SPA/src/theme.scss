@@ -1,0 +1,60 @@
+@import "~@angular/material/theming";
+
+$purple: (
+  50: #7289da,
+  100: #7289da,
+  200: #7289da,
+  300: #7289da,
+  400: #677bc4,
+  500: #677bc4,
+  600: #677bc4,
+  700: #677bc4,
+  800: #5b6eae,
+  900: #5b6eae,
+  A100: #677bc4,
+  A200: #5b6eae,
+  A400: #5b6eae,
+  A700: #5b6eae,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
+
+$bg-dark: #202225;
+$bg-medium: #2f3136;
+$bg-light: #37393f;
+
+$primary: mat-palette($purple);
+$accent: mat-palette($mat-grey);
+$warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$theme: mat-dark-theme($primary, $accent, $warn);
+
+// Insert custom background color
+$background: map-get($theme, background);
+$background: map_merge(
+  $background,
+  (
+    background: $bg-light,
+  )
+);
+$theme: map_merge(
+  $theme,
+  (
+    background: $background,
+  )
+);

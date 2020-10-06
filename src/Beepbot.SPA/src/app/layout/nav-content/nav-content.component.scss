@@ -1,0 +1,32 @@
+@import "../../../theme.scss";
+
+.mat-list-base {
+  padding: 0;
+}
+
+.is-active {
+  background: mat-color($primary, 900);
+}
+
+mat-list-item {
+  &:hover {
+    background: mat-color($primary, 50) !important;
+  }
+
+  &:focus {
+    background: mat-color($primary, 900) !important;
+    transition: background 1s;
+  }
+}
+
+mat-list-option[aria-selected="true"] {
+  background: red;
+}
+
+mat-list-item[aria-selected="true"] {
+  background: red;
+}
+
+mat-list-item.mat-selected {
+  background: red;
+}
