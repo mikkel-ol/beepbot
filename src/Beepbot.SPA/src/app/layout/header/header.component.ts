@@ -16,8 +16,8 @@ export class HeaderComponent {
   discriminator: string;
   avatarUrl: string;
 
-  constructor(private user: UserService, private auth: AuthService) {
-    this.user.getMe().subscribe((user) => {
+  constructor(private userService: UserService, private auth: AuthService) {
+    this.userService.user$.subscribe((user) => {
       this.name = user.username.substring(0, user.username.indexOf('#'));
       this.discriminator = user.username.substring(user.username.indexOf('#'));
       this.avatarUrl = user.avatar;

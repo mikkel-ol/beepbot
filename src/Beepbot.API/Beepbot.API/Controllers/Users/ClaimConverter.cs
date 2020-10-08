@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 
 using AutoMapper;
+using Beepbot.API.Authorization;
 using static AspNet.Security.OAuth.Discord.DiscordAuthenticationConstants;
 
 namespace Beepbot.API.Controllers.Users
@@ -27,7 +28,8 @@ namespace Beepbot.API.Controllers.Users
                         discriminator = claim.Value; break;
                     case Claims.AvatarUrl: 
                         dest.Avatar = claim.Value; break;
-
+                    case CustomClaimTypes.Guilds:
+                        dest.Guilds = claim.Value; break;
                 }
             }
 

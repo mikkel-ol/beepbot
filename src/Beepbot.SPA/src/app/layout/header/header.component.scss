@@ -17,6 +17,15 @@ mat-toolbar {
   width: 32px;
 }
 
+.logo {
+  img {
+    width: 42px;
+    margin-right: 20px;
+  }
+
+  font-weight: 600;
+}
+
 .img-big {
   margin-right: 12px;
 }
@@ -36,5 +45,5 @@ mat-toolbar {
 
 .discriminator {
   color: #b6b7ba;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }

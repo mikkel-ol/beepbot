@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     // Ignore requests outside API domain
-    if (!request.url.startsWith(environment.apiRoot) || !request.url.startsWith(environment.hubRoot)) {
+    if (!request.url.startsWith(environment.apiRoot) && !request.url.startsWith(environment.hubRoot)) {
       return next.handle(request);
     }
 

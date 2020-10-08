@@ -6,6 +6,7 @@ namespace Beepbot.Domain.Authorization
     public static class Policies
     {
         public const string Admin = "admin";
+        public const string Default = "default";
         public const string Hub = "hub-access";
     }
 }

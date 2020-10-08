@@ -10,7 +10,7 @@ using Beepbot.API.Middleware;
 using Beepbot.API.Options;
 using Beepbot.Domain.Authorization;
 
-namespace Beepbot.API.Configurations
+namespace Beepbot.API.Configurations.Authentication
 {
     /// <summary>
     ///     Configuration of authentication

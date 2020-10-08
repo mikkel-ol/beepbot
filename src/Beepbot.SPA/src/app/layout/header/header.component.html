@@ -2,7 +2,9 @@
   <button *ngIf="isSmallScreen" mat-icon-button (click)="toggleSidenav.emit()">
     <mat-icon>menu</mat-icon>
   </button>
-  <div [fxLayoutAlign]="isSmallScreen ? 'center center' : 'start center'" fxFlex="1 1 auto">
+  <div class="logo" [fxLayoutAlign]="isSmallScreen ? 'center center' : 'start center'" fxFlex="1 1 auto">
+    <img src="assets/img/logo-square.png" alt="" />
+    <div>Beep Bot</div>
   </div>
 
   <div *ngIf="isSmallScreen; else account_btn_with_text">

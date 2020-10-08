@@ -1,1 +1,3 @@
-<p>soundboard works!</p>
+<div *ngFor="let sound of sounds$ | async">
+    {{ sound.title }}
+</div>

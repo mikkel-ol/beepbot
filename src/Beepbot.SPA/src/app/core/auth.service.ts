@@ -18,7 +18,7 @@ export class AuthService {
 
   logout() {
     this.http.post(`${this.apiUrl}/auth/logout`, null).subscribe(() => {
-      sessionStorage.setItem('isLoggedIn', 'false');
+      sessionStorage.clear();
       this.router.navigate(['/auth/login']);
     })
   }

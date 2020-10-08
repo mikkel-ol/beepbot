@@ -11,7 +11,7 @@ export class CallbackComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userService.getMe().subscribe(() => {
+    this.userService.user$.subscribe(() => {
       sessionStorage.setItem('isLoggedIn', 'true');
       this.router.navigate(['/']);
     });

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 using Beepbot.Application.Services.RabbitMQ;
 using Beepbot.API.Configurations;
-
+using Beepbot.API.Configurations.Authentication;
 using Beepbot.API.Hubs.Soundboard;
 
 using Beepbot.API.Options;

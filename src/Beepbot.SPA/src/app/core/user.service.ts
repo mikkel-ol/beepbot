@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Server } from './models/server';
 import { User } from './models/user';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getMe(): Observable<User> {
+  get user$(): Observable<User> {
     return sessionStorage.getItem('user')
       ? of(JSON.parse(sessionStorage.getItem('user')))
       : this.http.get(`${this.apiUrl}/users/@me`).pipe(
@@ -21,5 +22,9 @@ export class UserService {
             sessionStorage.setItem('user', JSON.stringify(user));
           })
         );
+  }
+
+  get servers$(): Observable<Array<Server>> {
+    return this.http.get<Array<Server>>(`${this.apiUrl}/servers`);
   }
 }
