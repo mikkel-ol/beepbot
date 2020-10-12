@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beepbot.Persistence", "Beep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beepbot.Application", "Beepbot.Application\Beepbot.Application.csproj", "{A8D0F450-9D88-437C-8B2D-155DE840CC39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beepbot.BlobStorage", "Beepbot.BlobStorage\Beepbot.BlobStorage.csproj", "{4DE83E69-6357-4143-9D50-A28EF828173F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,5 +116,17 @@ Global
 		{A8D0F450-9D88-437C-8B2D-155DE840CC39}.Release|x64.Build.0 = Release|Any CPU
 		{A8D0F450-9D88-437C-8B2D-155DE840CC39}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8D0F450-9D88-437C-8B2D-155DE840CC39}.Release|x86.Build.0 = Release|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Debug|x64.Build.0 = Debug|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Debug|x86.Build.0 = Debug|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Release|x64.ActiveCfg = Release|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Release|x64.Build.0 = Release|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Release|x86.ActiveCfg = Release|Any CPU
+		{4DE83E69-6357-4143-9D50-A28EF828173F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

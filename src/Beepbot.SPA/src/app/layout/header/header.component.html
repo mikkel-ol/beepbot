@@ -2,9 +2,16 @@
   <button *ngIf="isSmallScreen" mat-icon-button (click)="toggleSidenav.emit()">
     <mat-icon>menu</mat-icon>
   </button>
-  <div class="logo" [fxLayoutAlign]="isSmallScreen ? 'center center' : 'start center'" fxFlex="1 1 auto">
+  <!-- <div class="logo" [fxLayoutAlign]="isSmallScreen ? 'center center' : 'start center'" fxFlex="1 1 auto">
     <img src="assets/img/logo-square.png" alt="" />
     <div>Beep Bot</div>
+  </div> -->
+  
+  <div class="logo" fxFlex="1 1 auto">
+    <div *ngIf="selected$ | async as guild" [fxLayoutAlign]="isSmallScreen ? 'center center' : 'start center'" >
+      <img *ngIf="!isSmallScreen" src="https://cdn.discordapp.com/icons/{{guild.id}}/{{guild.avatar}}.webp?size=256" alt="" />
+      <div>{{guild.title}}</div>
+    </div>
   </div>
 
   <div *ngIf="isSmallScreen; else account_btn_with_text">

@@ -1,7 +1,7 @@
 import * as Discord from 'discord.js';
 import Events from './events';
 import RabbitMQ from './rabbitmq';
-import Soundboard from './soundboard';
+import { Soundboard } from './soundboard';
 
 const client = new Discord.Client();
 

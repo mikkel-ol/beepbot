@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -14,6 +15,7 @@ using Beepbot.API.Configurations.Authentication;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Beepbot.API.Options;
 
 namespace Beepbot.API.Middleware
 {
@@ -35,8 +37,8 @@ namespace Beepbot.API.Middleware
 
             using var response = await context.Backchannel.SendAsync
             (
-                request, 
-                HttpCompletionOption.ResponseHeadersRead, 
+                request,
+                HttpCompletionOption.ResponseHeadersRead,
                 context.Request.HttpContext.RequestAborted
             );
 
@@ -51,6 +53,11 @@ namespace Beepbot.API.Middleware
             {
                 new Claim(CustomClaimTypes.Guilds, JsonConvert.SerializeObject(guilds, serializerSettings))
             };
+
+            if (context.Principal.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value == DiscordOptions.AdminId)
+            {
+                claims.Add(new Claim(CustomClaimTypes.IsAdmin, true.ToString()));
+            }
 
             var appIdentity = new ClaimsIdentity(claims);
 

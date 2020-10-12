@@ -8,7 +8,7 @@ namespace Beepbot.API.Hubs.Soundboard
     {
         public MappingProfile()
         {
-            CreateMap<PlayDTO.Post, Play.Command>();
+            CreateMap<PlayDto.Post, Play.Command>();
         }
     }
 }

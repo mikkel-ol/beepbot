@@ -53,6 +53,10 @@ namespace Beepbot.API.Filters
                         message);
                     break;
 
+                case GuildExistsException exception:
+                    context.Result = new ErrorResult(StatusCodes.Status400BadRequest, nameof(GuildExistsException), exception.Message);
+                    break;
+
                 default:
                     if (environment.IsDevelopment())
                     {

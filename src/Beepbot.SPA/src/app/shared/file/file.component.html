@@ -1,0 +1,8 @@
+<div class="file mat-body">
+    <mat-icon>insert_drive_file</mat-icon>
+  
+    <ng-container *ngIf="!fileUrl">{{ file.name }}</ng-container>
+  
+    <a *ngIf="fileUrl" [href]="fileUrl">{{ file.name }}</a>
+  </div>
+  

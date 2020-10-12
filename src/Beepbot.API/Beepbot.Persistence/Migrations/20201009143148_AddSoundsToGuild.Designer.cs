@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Beepbot.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200930154659_Initial")]
-    partial class Initial
+    [Migration("20201009143148_AddSoundsToGuild")]
+    partial class AddSoundsToGuild
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,22 @@ namespace Beepbot.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Beepbot.Domain.Entities.Guild", b =>
+                {
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Guilds");
+                });
+
             modelBuilder.Entity("Beepbot.Domain.Entities.Sound", b =>
                 {
                     b.Property<long>("Id")
@@ -27,9 +43,26 @@ namespace Beepbot.Persistence.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long>("GuildId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("GuildId");
+
                     b.ToTable("Sounds");
+                });
+
+            modelBuilder.Entity("Beepbot.Domain.Entities.Sound", b =>
+                {
+                    b.HasOne("Beepbot.Domain.Entities.Guild", "Guild")
+                        .WithMany("Sounds")
+                        .HasForeignKey("GuildId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

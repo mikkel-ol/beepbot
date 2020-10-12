@@ -1,10 +1,11 @@
 namespace Beepbot.API.Hubs.Soundboard
 {
-    public class PlayDTO
+    public class PlayDto
     {
         public class Post
         {
-            public long AudioId { get; set; }
+            public string VoiceChannelId { get; set; }
+            public long SoundId { get; set; }
         }
     }
 }

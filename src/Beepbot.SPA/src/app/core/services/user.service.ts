@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Server } from './models/server';
-import { User } from './models/user';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +21,5 @@ export class UserService {
             sessionStorage.setItem('user', JSON.stringify(user));
           })
         );
-  }
-
-  get servers$(): Observable<Array<Server>> {
-    return this.http.get<Array<Server>>(`${this.apiUrl}/servers`);
   }
 }

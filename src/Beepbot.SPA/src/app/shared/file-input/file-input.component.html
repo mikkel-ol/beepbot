@@ -1,0 +1,3 @@
+<input type="file" #input [multiple]="multiple" [disabled]="disabled" (change)="setFiles(input.files)" />
+
+<app-file *ngFor="let file of input.files" [file]="file"></app-file>

@@ -20,7 +20,8 @@ mat-toolbar {
 .logo {
   img {
     width: 42px;
-    margin-right: 20px;
+    margin: 0 16px;
+    border-radius: 50%;
   }
 
   font-weight: 600;

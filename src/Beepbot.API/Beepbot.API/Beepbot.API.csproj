@@ -5,6 +5,7 @@
     <ProjectReference Include="..\Beepbot.Infrastructure\Beepbot.Infrastructure.csproj" />
     <ProjectReference Include="..\Beepbot.Persistence\Beepbot.Persistence.csproj" />
     <ProjectReference Include="..\Beepbot.Application\Beepbot.Application.csproj" />
+    <ProjectReference Include="..\Beepbot.BlobStorage\Beepbot.BlobStorage.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.Discord" Version="3.1.3" />

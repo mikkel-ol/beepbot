@@ -30,6 +30,8 @@ namespace Beepbot.API.Controllers.Users
                         dest.Avatar = claim.Value; break;
                     case CustomClaimTypes.Guilds:
                         dest.Guilds = claim.Value; break;
+                    case CustomClaimTypes.IsAdmin:
+                        dest.IsAdmin = bool.Parse(claim.Value); break;
                 }
             }
 

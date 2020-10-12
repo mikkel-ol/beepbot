@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Beepbot.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201008155409_AddGuild")]
-    partial class AddGuild
+    [Migration("20201011200616_AddUrlToSound")]
+    partial class AddUrlToSound
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,7 @@ namespace Beepbot.Persistence.Migrations
             modelBuilder.Entity("Beepbot.Domain.Entities.Guild", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
@@ -45,12 +43,29 @@ namespace Beepbot.Persistence.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long>("GuildId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GuildId");
+
                     b.ToTable("Sounds");
+                });
+
+            modelBuilder.Entity("Beepbot.Domain.Entities.Sound", b =>
+                {
+                    b.HasOne("Beepbot.Domain.Entities.Guild", "Guild")
+                        .WithMany("Sounds")
+                        .HasForeignKey("GuildId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

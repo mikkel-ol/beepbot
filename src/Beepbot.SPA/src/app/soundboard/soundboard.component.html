@@ -1,3 +1,7 @@
 <div *ngFor="let sound of sounds$ | async">
+  <button (click)="play(sound.id)">
     {{ sound.title }}
+  </button>
 </div>
+
+<input #file type="file" [multiple]="true" id="file" (change)="handleFileInput($event.target.files)" />

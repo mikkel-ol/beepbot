@@ -2,24 +2,42 @@
 
 mat-toolbar {
   background: $bg-dark;
+  padding: 0 20px;
 
-  padding: 0;
-
-  button {
-    display: flex;
-    width: 100%;
+  mat-form-field {
     height: 100%;
-    border: 0;
-
-    background: $bg-dark;
-
-    color: white;
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
 
-  img {
-    width: 42px;
-    margin-right: 20px;
+  ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    background-color: $bg-dark !important;
   }
 
-  font-weight: 600;
+  ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    display: none;
+  }
+
+  ::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: $bg-dark !important;
+  }
+
+  ::ng-deep.mat-form-field-flex {
+    background-color: $bg-dark !important;
+    padding: 0;
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    padding: 0;
+    width: 100%;
+  }
+
+  ::ng-deep .mat-form-field-infix {
+    padding: 0;
+    border: 0 none !important;
+  }
 }

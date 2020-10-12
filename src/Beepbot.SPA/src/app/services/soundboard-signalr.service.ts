@@ -37,7 +37,7 @@ export class SoundboardSignalrService extends SignalrService {
     }
   }
 
-  public play(audioId: number) {
-    this.hubConnection.send(this.playSoundTopic, { audioId });
+  public play(voiceChannelId: string, soundId: number) {
+    this.hubConnection.send(this.playSoundTopic, { voiceChannelId, soundId });
   }
 }

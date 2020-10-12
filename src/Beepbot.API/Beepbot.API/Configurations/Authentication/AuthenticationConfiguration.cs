@@ -9,6 +9,7 @@ using AspNet.Security.OAuth.Discord;
 using Beepbot.API.Middleware;
 using Beepbot.API.Options;
 using Beepbot.Domain.Authorization;
+using Beepbot.API.Authorization;
 
 namespace Beepbot.API.Configurations.Authentication
 {
@@ -59,6 +60,12 @@ namespace Beepbot.API.Configurations.Authentication
 
             services.AddAuthorization(options =>
             {
+                options.AddPolicy(name: Policies.Admin, policy =>
+                {
+                    policy.AuthenticationSchemes.Add(CookieAuthenticationDefaults.AuthenticationScheme);
+                    policy.RequireClaim(CustomClaimTypes.IsAdmin);
+                });
+
                 options.AddPolicy(name: Policies.Hub, policy =>
                 {
                     policy.AuthenticationSchemes.Add(CookieAuthenticationDefaults.AuthenticationScheme);

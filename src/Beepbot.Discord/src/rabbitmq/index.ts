@@ -1,24 +1,21 @@
 import * as Amqp from 'amqp-ts';
 import Logger from '../common/logger';
+import SoundboardConsumer from './consumers/soundboard';
+import GuildAddedProducer from './producers/guildAdded';
 
 class RabbitMQ {
   private static instance: RabbitMQ;
   private connection: Amqp.Connection;
-  private exchange: Amqp.Exchange;
-  private queue: Amqp.Queue;
   private logger: Logger;
-
+  
   private constructor() {
-    this.connection = new Amqp.Connection(process.env.BEEPBOT_RABBITMQ_URI);
-    this.exchange = this.connection.declareExchange('soundboard', 'fanout', { durable: false });
-    this.queue = this.connection.declareQueue('soundboard', { exclusive: false, durable: false, autoDelete: true });
     this.logger = Logger.getInstance();
 
-    this.queue.bind(this.exchange);
+    this.connection = new Amqp.Connection(process.env.BEEPBOT_RABBITMQ_URI);
 
-    this.queue.activateConsumer((message) => {
-      console.log('Message received: ' + message.getContent());
-    });
+    // Setup consumers and producers
+    GuildAddedProducer.getInstance().setup(this.connection);
+    SoundboardConsumer.getInstance().setup(this.connection);
 
     this.connection.completeConfiguration().then(() => {
       // Ensure queue, binding or consumer exist

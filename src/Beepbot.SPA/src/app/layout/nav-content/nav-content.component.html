@@ -16,4 +16,22 @@
     <mat-icon matListIcon> volume_up </mat-icon>
     <a matLine>Soundboard</a>
   </mat-list-item>
+
+  <mat-list-item
+    class="mat-primary"
+    [routerLink]="['/greetings']"
+    [routerLinkActive]="['is-active']"
+  >
+    <mat-icon matListIcon> emoji_people </mat-icon>
+    <a matLine>Greetings</a>
+  </mat-list-item>
+
+  <mat-list-item
+    class="mat-primary"
+    [routerLink]="['/music']"
+    [routerLinkActive]="['is-active']"
+  >
+    <mat-icon matListIcon> music_note </mat-icon>
+    <a matLine>Music</a>
+  </mat-list-item>
 </mat-nav-list>

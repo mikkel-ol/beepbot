@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AuthService } from '@core/auth.service';
-import { UserService } from '@core/user.service';
+import { Guild } from '@core/models/guild';
+import { AuthService } from '@core/services/auth.service';
+import { GuildsService } from '@core/services/guilds.service';
+import { UserService } from '@core/services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -15,12 +18,14 @@ export class HeaderComponent {
   name: string;
   discriminator: string;
   avatarUrl: string;
+  selected$: Observable<Guild>;
 
-  constructor(private userService: UserService, private auth: AuthService) {
+  constructor(private userService: UserService, private auth: AuthService, private guildsService: GuildsService) {
     this.userService.user$.subscribe((user) => {
       this.name = user.username.substring(0, user.username.indexOf('#'));
       this.discriminator = user.username.substring(user.username.indexOf('#'));
       this.avatarUrl = user.avatar;
+      this.selected$ = this.guildsService.selected$;
     });
   }
 

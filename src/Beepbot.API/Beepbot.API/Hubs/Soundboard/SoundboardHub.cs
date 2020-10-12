@@ -19,7 +19,7 @@ namespace Beepbot.API.Hubs.Soundboard
             this.mapper = mapper;
         }
 
-        public async Task PlaySound(PlayDTO.Post request)
+        public async Task PlaySound(PlayDto.Post request)
         {
             var command = mapper.Map<Play.Command>(request);
 

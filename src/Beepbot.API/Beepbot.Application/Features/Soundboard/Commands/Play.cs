@@ -1,48 +1,85 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+using Microsoft.EntityFrameworkCore;
+
 using AutoMapper;
+
 using Beepbot.Application.Services.RabbitMQ;
+using Beepbot.Domain.Entities;
+using Beepbot.Infrastructure.Exceptions;
+using Beepbot.Infrastructure.Extensions;
+using Beepbot.Persistence;
+
 using FluentValidation;
 
 using MediatR;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Beepbot.BlobStorage;
 
 namespace Beepbot.Application.Features.Soundboard.Commands
 {
     public class Play
     {
-        public class Command : IRequest<Result>
+        public class Command : IRequest<Unit>
         {
-            public int AudioId { get; set; }
-        }
-
-        public class Result
-        {
+            public string VoiceChannelId { get; set; }
+            public long SoundId { get; set; }
         }
 
         public class Validator : AbstractValidator<Command>
         {
             public Validator()
             {
+                RuleFor(x => x.VoiceChannelId).NotNull();
+                RuleFor(x => x.SoundId).NotNull();
             }
         }
 
-        public class Handler : IRequestHandler<Command, Result>
+        public class Handler : IRequestHandler<Command, Unit>
         {
             private readonly IMapper mapper;
+            private readonly AppDbContext context;
             private readonly IRabbitMQService rabbitService;
+            private readonly IAzureBlobStorageService blobStorageService;
 
-            public Handler(IMapper mapper, IRabbitMQService rabbitService)
+            public Handler(IMapper mapper, IRabbitMQService rabbitService, AppDbContext context, IAzureBlobStorageService blobStorageService)
             {
                 this.mapper = mapper;
+                this.context = context;
                 this.rabbitService = rabbitService;
+                this.blobStorageService = blobStorageService;
             }
 
-            public Task<Result> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                rabbitService.SendMessage("Hej med dig!");
+                var sound = await context.Sounds.FirstOrDefaultAsync(sound => sound.Id == request.SoundId);
 
-                return Task.FromResult(new Result());
+                if (sound.IsNull())
+                {
+                    throw new NotFoundException(request.SoundId, typeof(Sound));
+                }
+
+                var sasToken = blobStorageService.GenerateSASTokenForContainer(sound.GuildId.ToString());
+
+                var messageObj = new
+                {
+                    VoiceChannelId = request.VoiceChannelId,
+                    AudioUrl = sound.Url + "?" + sasToken
+                };
+
+                var jsonSettings = new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+
+                var message = JsonConvert.SerializeObject(messageObj, jsonSettings);
+
+                rabbitService.SendMessage(message);
+
+                return Unit.Value;
             }
         }
     }

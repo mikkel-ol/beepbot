@@ -2,12 +2,12 @@
 
 namespace Beepbot.Persistence.Migrations
 {
-    public partial class SoundTitle : Migration
+    public partial class AddUrlToSound : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Title",
+                name: "Url",
                 table: "Sounds",
                 nullable: true);
         }
@@ -15,7 +15,7 @@ namespace Beepbot.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Title",
+                name: "Url",
                 table: "Sounds");
         }
     }

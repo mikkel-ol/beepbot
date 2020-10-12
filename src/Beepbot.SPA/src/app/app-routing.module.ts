@@ -6,6 +6,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { SoundboardComponent } from './soundboard/soundboard.component';
+import { GreetingsComponent } from './greetings/greetings.component';
+import { MusicComponent } from './music/music.component';
 
 const routes: Routes = [
   {
@@ -15,7 +17,9 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: '/home' },
       { path: 'home', component: HomeComponent },
-      { path: 'soundboard', component: SoundboardComponent }
+      { path: 'soundboard', component: SoundboardComponent },
+      { path: 'greetings', component: GreetingsComponent },
+      { path: 'music', component: MusicComponent }
     ],
   },
   {

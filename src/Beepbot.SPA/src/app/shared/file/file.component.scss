@@ -1,0 +1,19 @@
+:host {
+    display: block;
+  }
+  
+  .file {
+    display: flex;
+    align-items: center;
+    line-height: 2em;
+    margin-top: 1em;
+  
+    .mat-icon {
+      margin-right: 0.5em;
+    }
+  }
+  
+  a {
+    color: inherit;
+  }
+  

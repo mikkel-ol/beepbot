@@ -13,8 +13,8 @@ class Fs {
       .filter((name) => this.isDirectory(source, name));
   }
 
-  static getSoundboardFileById(source: string) {
-    const files = this.getFilesFullPath('/assets/sounds/soundboard/');
+  static getSoundboardFileByName(source: string) {
+    const files = this.getFilesFullPath('soundboard');
     return files.find(
       (filenameWithExtension) =>
         this.getFileName(filenameWithExtension) == source,

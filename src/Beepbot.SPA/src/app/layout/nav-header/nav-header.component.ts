@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Server } from '@core/models/server';
-import { UserService } from '@core/user.service';
+import { MatSelectChange } from '@angular/material/select';
+import { Guild } from '@core/models/guild';
+import { GuildsService } from '@core/services/guilds.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,23 +10,17 @@ import { Observable } from 'rxjs';
   styleUrls: ['./nav-header.component.scss']
 })
 export class NavHeaderComponent implements OnInit {
-  servers$: Observable<Array<Server>>;
+  selected$: Observable<Guild>;
+  guilds$: Observable<Array<Guild>>;
 
-  foods = [
-    {
-      title: "1"
-    },
-    {
-      title: "2"
-    }
-  ]
-
-  selected = this.foods[1].title;
-
-  constructor(private userService: UserService) { }
+  constructor(private guildsService: GuildsService) { }
 
   ngOnInit(): void {
-    this.servers$ = this.userService.servers$;
+    this.guilds$ = this.guildsService.guilds$;
+    this.selected$ = this.guildsService.selected$;
   }
 
+  onGuildSelect(e: MatSelectChange) {
+    this.guildsService.setSelected(e.value);
+  }
 }

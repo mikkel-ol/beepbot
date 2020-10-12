@@ -12,7 +12,9 @@ using Beepbot.API.Configurations.Authentication;
 using Beepbot.API.Hubs.Soundboard;
 
 using Beepbot.API.Options;
-
+using Beepbot.API.Extensions;
+using Beepbot.API.Configurations.Authorization;
+using Beepbot.Domain.Options;
 
 namespace Beepbot.API
 {
@@ -49,11 +51,19 @@ namespace Beepbot.API
 
             services.AddAuthentication(Configuration, env);
 
+            services.AddAuthorizationHandlers(Configuration, env);
+
             services.AddMapper(Configuration, env);
 
             services.AddMediatR(Configuration, env);
 
             services.AddValidation(Configuration, env);
+
+            services.AddBlobStorage(Configuration, env);
+
+            services.AddOptions();
+
+            services.Configure<AzureBlobStorageOptions>(Configuration.GetSection("AzureBlobStorage"));
 
             services.AddSignalR(Configuration, env);
 
@@ -82,6 +92,8 @@ namespace Beepbot.API
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseRabbitMqListener();
 
             app.UseSwagger();
 

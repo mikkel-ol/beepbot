@@ -8,11 +8,13 @@
     <ProjectReference Include="..\Beepbot.Domain\Beepbot.Domain.csproj" />
     <ProjectReference Include="..\Beepbot.Infrastructure\Beepbot.Infrastructure.csproj" />
     <ProjectReference Include="..\Beepbot.Persistence\Beepbot.Persistence.csproj" />
+    <ProjectReference Include="..\Beepbot.BlobStorage\Beepbot.BlobStorage.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
   </ItemGroup>

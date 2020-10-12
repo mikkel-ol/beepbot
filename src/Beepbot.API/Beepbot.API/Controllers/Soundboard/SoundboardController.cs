@@ -7,6 +7,8 @@ using AutoMapper;
 using Beepbot.Application.Features.Soundboard.Queries;
 
 using MediatR;
+using Beepbot.Domain.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Beepbot.API.Controllers.Soundboard
 {
@@ -21,10 +23,7 @@ namespace Beepbot.API.Controllers.Soundboard
             this.mediator = mediator;
         }
 
-        /// <summary>
-        ///     User endpoint
-        /// </summary>
-        /// <returns>User DTO with information</returns>
+        [Authorize(Policy = Policies.Admin)]
         [HttpGet]
         public async Task<ActionResult<SoundDTO>> Get()
         {
