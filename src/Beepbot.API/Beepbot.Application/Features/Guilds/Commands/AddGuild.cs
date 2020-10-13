@@ -1,14 +1,14 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 using AutoMapper;
 using Beepbot.Domain.Entities;
-using Beepbot.Infrastructure.Exceptions;
+using Beepbot.Infrastructure.Extensions;
 using Beepbot.Persistence;
 using FluentValidation;
 
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Beepbot.Application.Features.Guilds.Commands
 {
@@ -19,6 +19,7 @@ namespace Beepbot.Application.Features.Guilds.Commands
             public string Id { get; set; }
             public string Title { get; set; }
             public string Avatar { get; set; }
+            public IEnumerable<GuildChannel> Channels { get; set; }
         }
 
         public class Validator : AbstractValidator<Command>
@@ -44,17 +45,24 @@ namespace Beepbot.Application.Features.Guilds.Commands
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 // Ignore if already exists
-                if (await context.Guilds.AnyAsync(guild => guild.Id.ToString() == request.Id))
+                if (context.Guilds.Find(request.Id).IsNotNull())
                     return Unit.Value;
 
-                var dbServer = mapper.Map<Guild>(request);
+                var dbGuild = mapper.Map<Guild>(request);
 
-                await context.Guilds.AddAsync(dbServer);
+                await context.Guilds.AddAsync(dbGuild);
 
                 await context.SaveChangesAsync();
 
                 return Unit.Value;
             }
+        }
+
+        public class GuildChannel
+        {
+            public string Id { get; set; }
+            public string Type { get; set; }
+            public string Name { get; set; }
         }
     }
 }

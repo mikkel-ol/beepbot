@@ -8,7 +8,7 @@ namespace Beepbot.Application.Features.Soundboard
     {
         public MappingProfile()
         {
-            CreateMap<Sound, SoundsForGuild.Result>();                
+            CreateMap<Sound, SoundsForGuild.Result>();           
 
             CreateMap<Sound, Sounds.Result>();
         }

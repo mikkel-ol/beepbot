@@ -1,7 +1,20 @@
-<div *ngFor="let sound of sounds$ | async">
-  <button (click)="play(sound.id)">
-    {{ sound.title }}
-  </button>
-</div>
+<app-channel-selector
+  [guild]="selected$ | async"
+  (channelSelect)="channelSelected($event)"
+></app-channel-selector>
 
-<input #file type="file" [multiple]="true" id="file" (change)="handleFileInput($event.target.files)" />
+<div class="container">
+  <div *ngFor="let sound of sounds$ | async">
+    <button (click)="play(sound.id)">
+      {{ sound.title }}
+    </button>
+  </div>
+
+  <input
+    #file
+    type="file"
+    [multiple]="true"
+    id="file"
+    (change)="handleFileInput($event.target.files)"
+  />
+</div>

@@ -3,6 +3,8 @@ import { Sound } from '@core/models/sound';
 import { Observable } from 'rxjs';
 import { SoundboardSignalrService } from '../services/soundboard-signalr.service';
 import { GuildsService } from '@core/services/guilds.service';
+import { Guild } from '@core/models/guild';
+import { GuildChannel } from '@core/models/guildChannel';
 
 @Component({
   selector: 'app-soundboard',
@@ -14,6 +16,8 @@ export class SoundboardComponent implements OnInit {
   fileInput: ElementRef;
 
   sounds$: Observable<Array<Sound>>;
+  selected$: Observable<Guild>;
+  selectedVoiceChannel: GuildChannel;
 
   constructor(
     private signalrService: SoundboardSignalrService,
@@ -23,6 +27,7 @@ export class SoundboardComponent implements OnInit {
   async ngOnInit() {
     await this.signalrService.startConnection();
     this.sounds$ = this.guildService.sounds$;
+    this.selected$ = this.guildService.selected$;
   }
 
   ngOnDestroy() {
@@ -30,16 +35,24 @@ export class SoundboardComponent implements OnInit {
   }
 
   play(soundId: number) {
-    this.signalrService.play('588030636934037516', soundId);
+    if (!this.selectedVoiceChannel) {
+      // show error
+      return;
+    }
+    this.signalrService.play(this.selectedVoiceChannel.id, soundId);
   }
 
   handleFileInput(files: FileList) {
-    this.guildService.selected$.subscribe(guild => {
+   this.selected$.subscribe(guild => {
       Array.from(files).forEach(file => {
         this.guildService.uploadAudioForGuild(guild.id, file);
       });
     })
 
     this.fileInput.nativeElement.value = "";
+  }
+
+  channelSelected(channel: GuildChannel) {
+    this.selectedVoiceChannel = channel;
   }
 }

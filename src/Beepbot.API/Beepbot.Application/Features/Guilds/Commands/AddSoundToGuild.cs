@@ -23,7 +23,7 @@ namespace Beepbot.Application.Features.Guilds.Commands
     {
         public class Command : IRequest<Result>
         {
-            public long GuildId { get; set; }
+            public string GuildId { get; set; }
             public string SoundName { get; set; }
             public Stream Audio { get; set; }
         }

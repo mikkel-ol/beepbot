@@ -17,7 +17,7 @@ namespace Beepbot.Application.Features.Soundboard.Queries
     {
         public class Query : IRequest<IEnumerable<Result>>
         {
-            public long GuildId { get; set; }
+            public string GuildId { get; set; }
         }
 
         public class Result

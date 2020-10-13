@@ -8,7 +8,7 @@ namespace Beepbot.API.Controllers.Guilds
         public MappingProfile()
         {
             CreateMap<Beepbot.API.Controllers.Guilds.GuildDto, Beepbot.Application.Features.Guilds.Queries.GuildDto>();
-            CreateMap<long, SoundsForGuild.Query>()
+            CreateMap<string, SoundsForGuild.Query>()
                 .ForMember(dest => dest.GuildId, opts => opts.MapFrom(src => src));
         }
     }

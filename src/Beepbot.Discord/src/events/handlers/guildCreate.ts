@@ -1,5 +1,6 @@
 import * as Discord from 'discord.js';
 import Logger from '../../common/logger';
+import { GuildChannel } from '../../models/guildChannel';
 import GuildAddedProducer from '../../rabbitmq/producers/guildAdded';
 
 class GuildCreateHandler {
@@ -9,11 +10,18 @@ class GuildCreateHandler {
         `Added to new guild with ID ${guild.id}`,
       );
 
+      let customChannels = new Array<GuildChannel>();
+
+      Object.assign(customChannels, [...guild.channels.cache.values()]);
+
+      customChannels = customChannels.filter(guild => guild.type !== "news" && guild.type !== "store");
+
       // Send to RabbitMQ consumbers
       GuildAddedProducer.getInstance().send({
         id: guild.id,
         title: guild.name,
-        avatar: guild.icon
+        avatar: guild.icon,
+        channels: customChannels
       })
     });
   }

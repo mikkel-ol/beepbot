@@ -56,8 +56,8 @@ namespace Beepbot.API.Controllers.Guilds
             return Ok(result);
         }
 
-        [HttpGet("{guildId:long}/sounds")]
-        public async Task<ActionResult<IEnumerable<SoundsForGuild.Result>>> GetAllSoundsForGuild(long guildId)
+        [HttpGet("{guildId}/sounds")]
+        public async Task<ActionResult<IEnumerable<SoundsForGuild.Result>>> GetAllSoundsForGuild(string guildId)
         {
             var authResult = await authorizationService.AuthorizeAsync(User, guildId, new GuildRequirement());
 
@@ -73,8 +73,8 @@ namespace Beepbot.API.Controllers.Guilds
             return Ok(result);
         }
 
-        [HttpPost("{guildId:long}/sounds")]
-        public async Task<ActionResult> AddAudioForGuild(long guildId, [FromForm] IFormFile file)
+        [HttpPost("{guildId}/sounds")]
+        public async Task<ActionResult> AddAudioForGuild(string guildId, [FromForm] IFormFile file)
         {
             var authResult = await authorizationService.AuthorizeAsync(User, guildId, new GuildRequirement());
 

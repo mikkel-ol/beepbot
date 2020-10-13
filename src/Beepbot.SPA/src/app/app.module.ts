@@ -16,6 +16,8 @@ import { MusicComponent } from './music/music.component';
 import { GreetingsComponent } from './greetings/greetings.component';
 import { UnderConstructionComponent } from './core/under-construction/under-construction.component';
 import { KonamiModule } from 'ngx-konami';
+import { ChannelSelectorComponent } from './soundboard/channel-selector/channel-selector.component';
+import { VoiceChannelComponent } from './soundboard/voice-channel/voice-channel.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { KonamiModule } from 'ngx-konami';
     MusicComponent,
     GreetingsComponent,
     UnderConstructionComponent,
+    ChannelSelectorComponent,
+    VoiceChannelComponent,
   ],
   imports: [
     BrowserModule,

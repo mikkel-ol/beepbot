@@ -1,0 +1,47 @@
+.selected {
+  color: white;
+}
+
+.content {
+  margin-left: 8px;
+  padding: 2px 8px;
+
+  border-radius: 6px;
+
+  &:hover {
+    background: #34373c;
+    color: white;
+  }
+}
+
+.mainContent {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-width: 0;
+  height: 32px;
+  padding: 1px 0;
+  cursor: pointer;
+
+  svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    margin-right: 6px;
+  }
+}

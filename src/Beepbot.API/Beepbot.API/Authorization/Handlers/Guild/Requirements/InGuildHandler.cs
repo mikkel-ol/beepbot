@@ -10,9 +10,9 @@ using Newtonsoft.Json;
 
 namespace Beepbot.API.Authorization.Handlers.Guild.Requirements
 {
-    public class InGuildHandler : AuthorizationHandler<GuildRequirement, long>
+    public class InGuildHandler : AuthorizationHandler<GuildRequirement, string>
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, GuildRequirement requirement, long resource)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, GuildRequirement requirement, string resource)
         {
             var claim = context.User.Claims.FirstOrDefault(claim => claim.Type == CustomClaimTypes.Guilds).Value;
 
@@ -23,7 +23,7 @@ namespace Beepbot.API.Authorization.Handlers.Guild.Requirements
 
             var guilds = JsonConvert.DeserializeObject<IEnumerable<Guild>>(claim);
 
-            if (guilds.Any(guild => guild.Id == resource.ToString()))
+            if (guilds.Any(guild => guild.Id == resource))
             {
                 context.Succeed(requirement);
             }

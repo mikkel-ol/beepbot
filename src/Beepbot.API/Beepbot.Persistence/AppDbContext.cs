@@ -18,6 +18,15 @@ namespace Beepbot.Persistence
 
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<TextChannel>();
+            builder.Entity<VoiceChannel>();
+            builder.Entity<CategoryChannel>();
+
+            base.OnModelCreating(builder);
+        }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             ChangeTracker.DetectChanges();
@@ -50,5 +59,6 @@ namespace Beepbot.Persistence
 
         public DbSet<Sound> Sounds { get; set; }
         public DbSet<Guild> Guilds { get; set; }
+        public DbSet<GuildChannel> GuildChannels { get; set; }
     }
 }

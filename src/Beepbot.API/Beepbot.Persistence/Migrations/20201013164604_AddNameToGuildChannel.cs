@@ -2,21 +2,21 @@
 
 namespace Beepbot.Persistence.Migrations
 {
-    public partial class AddUrlToSound : Migration
+    public partial class AddNameToGuildChannel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Url",
-                table: "Sounds",
+                name: "Name",
+                table: "GuildChannels",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Url",
-                table: "Sounds");
+                name: "Name",
+                table: "GuildChannels");
         }
     }
 }
