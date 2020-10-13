@@ -18,7 +18,8 @@ namespace Beepbot.Application.Services.RabbitMQ
 {
     public interface IRabbitMQService
     {
-        void SendMessage(string message);
+        void SendSoundboardMessage(string message);
+        void SendDisconnectMessage(string message);
         void RegisterListeners();
         void DeregisterListeners();
     }
@@ -42,7 +43,7 @@ namespace Beepbot.Application.Services.RabbitMQ
             this.channel = connection.CreateModel();
         }
 
-        public void SendMessage(string message)
+        public void SendSoundboardMessage(string message)
         {
             using (var channel = connection.CreateModel())
             {
@@ -50,6 +51,17 @@ namespace Beepbot.Application.Services.RabbitMQ
 
                 channel.QueueDeclare("soundboard_play", exclusive: false, durable: false, autoDelete: true);
                 channel.BasicPublish("soundboard_play", routingKey: "soundboard_play", basicProperties: null, body: body);
+            }
+        }
+
+        public void SendDisconnectMessage(string message)
+        {
+            using (var channel = connection.CreateModel())
+            {
+                var body = Encoding.UTF8.GetBytes(message);
+
+                channel.QueueDeclare("voice_disconnect", exclusive: false, durable: false, autoDelete: true);
+                channel.BasicPublish("voice_disconnect", routingKey: "voice_disconnect", basicProperties: null, body: body);
             }
         }
 

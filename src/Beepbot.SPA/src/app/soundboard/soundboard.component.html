@@ -1,6 +1,8 @@
 <app-channel-selector
   [guild]="selected$ | async"
+  [isConnected]="isConnectedToVoice"
   (channelSelect)="channelSelected($event)"
+  (disconnect)="disconnect($event)"
 ></app-channel-selector>
 
 <div class="container">

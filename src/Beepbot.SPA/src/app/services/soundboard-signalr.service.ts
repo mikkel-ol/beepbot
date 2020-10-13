@@ -9,6 +9,7 @@ import { SignalrService } from './signalr.service';
 })
 export class SoundboardSignalrService extends SignalrService {
   private readonly playSoundTopic = "PlaySound";
+  private readonly disconnectTopic = "DisconnectFromVoicechannel";
 
   constructor() {
     super();
@@ -39,5 +40,9 @@ export class SoundboardSignalrService extends SignalrService {
 
   public play(voiceChannelId: string, soundId: number) {
     this.hubConnection.send(this.playSoundTopic, { voiceChannelId, soundId });
+  }
+
+  public disconnect(guildId: string) {
+    this.hubConnection.send(this.disconnectTopic, guildId);
   }
 }

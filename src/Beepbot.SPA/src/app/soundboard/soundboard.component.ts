@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Sound } from '@core/models/sound';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { SoundboardSignalrService } from '../services/soundboard-signalr.service';
 import { GuildsService } from '@core/services/guilds.service';
 import { Guild } from '@core/models/guild';
@@ -18,6 +18,7 @@ export class SoundboardComponent implements OnInit {
   sounds$: Observable<Array<Sound>>;
   selected$: Observable<Guild>;
   selectedVoiceChannel: GuildChannel;
+  isConnectedToVoice: boolean;
 
   constructor(
     private signalrService: SoundboardSignalrService,
@@ -40,6 +41,7 @@ export class SoundboardComponent implements OnInit {
       return;
     }
     this.signalrService.play(this.selectedVoiceChannel.id, soundId);
+    this.isConnectedToVoice = true;
   }
 
   handleFileInput(files: FileList) {
@@ -54,5 +56,10 @@ export class SoundboardComponent implements OnInit {
 
   channelSelected(channel: GuildChannel) {
     this.selectedVoiceChannel = channel;
+  }
+
+  disconnect(guildId: string) {
+    this.signalrService.disconnect(guildId);
+    this.isConnectedToVoice = false;
   }
 }

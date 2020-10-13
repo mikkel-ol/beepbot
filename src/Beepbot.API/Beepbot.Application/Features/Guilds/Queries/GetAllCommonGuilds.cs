@@ -57,13 +57,6 @@ namespace Beepbot.Application.Features.Guilds.Queries
 
             protected override IEnumerable<Result> Handle(Query request)
             {
-                var allChannel = context.GuildChannels.ToList();
-
-                allChannel.ForEach(c =>
-                {
-                    System.Console.WriteLine(c.Id);
-                });
-
                 var commonDbGuilds = context.Guilds
                     .Include(guild => guild.Channels)
                     .AsEnumerable()

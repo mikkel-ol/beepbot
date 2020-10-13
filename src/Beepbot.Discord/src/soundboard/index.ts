@@ -5,6 +5,7 @@ import * as memoize from 'memoizee';
 export class Soundboard {
   private static instance: Soundboard;
   private client: Discord.Client;
+  connections = new Map<string, Discord.VoiceConnection>();
 
   private constructor(client: Discord.Client) {
     this.client = client;
@@ -21,12 +22,18 @@ export class Soundboard {
     }); // 10 min
 
     channel.join().then(async (connection) => {
+      this.connections.set(channel.guild.id, connection);
+
       const cachedAudioStream = (
         await cached(audio, { responseType: 'stream' })
       ).data;
 
       connection.play(cachedAudioStream);
     });
+  }
+
+  public disconnect(guildId: string) {
+    this.connections.get(guildId).disconnect();
   }
 
   public static init(client: Discord.Client) {

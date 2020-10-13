@@ -9,6 +9,8 @@ namespace Beepbot.API.Hubs.Soundboard
         public MappingProfile()
         {
             CreateMap<PlayDto.Post, Play.Command>();
+            CreateMap<string, Disconnect.Command>()
+                .ForMember(dest => dest.GuildId, opts => opts.MapFrom(src => src));
         }
     }
 }

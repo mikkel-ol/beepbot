@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Guild } from '@core/models/guild';
 import { GuildChannel } from '@core/models/guildChannel';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-channel-selector',
@@ -10,9 +11,12 @@ import { GuildChannel } from '@core/models/guildChannel';
 export class ChannelSelectorComponent implements OnInit {
   @Input()
   guild: Guild
-
+  @Input()
+  isConnected: boolean;
   @Output()
   channelSelect = new EventEmitter<GuildChannel>();
+  @Output()
+  disconnect = new EventEmitter();
 
   selected: GuildChannel;
   constructor() { }
@@ -23,5 +27,9 @@ export class ChannelSelectorComponent implements OnInit {
   onVoiceChannelSelected(channel: GuildChannel) {
     this.selected = channel;
     this.channelSelect.emit(channel);
+  }
+
+  onDisconnect() {
+    this.disconnect.emit(this.guild.id);
   }
 }

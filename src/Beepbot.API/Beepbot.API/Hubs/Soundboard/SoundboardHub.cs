@@ -25,5 +25,12 @@ namespace Beepbot.API.Hubs.Soundboard
 
             await mediator.Send(command);
         }
+
+        public async Task DisconnectFromVoicechannel(string request)
+        {
+            var command = mapper.Map<Disconnect.Command>(request);
+
+            await mediator.Send(command);
+        }
     }
 }
