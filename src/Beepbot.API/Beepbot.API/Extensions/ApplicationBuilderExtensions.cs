@@ -3,17 +3,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Beepbot.Application.Services.RabbitMQ;
+using Microsoft.Azure.ServiceBus;
+using Beepbot.Application.Services.AzureServiceBus;
 
 namespace Beepbot.API.Extensions
 {
     public static class ApplicationBuilderExtentions
     {
         // The simplest way to store a single long-living object, just for example.
-        private static IRabbitMQService listener { get; set; }
+        private static IAzureServiceBus serviceBus { get; set; }
 
-        public static IApplicationBuilder UseRabbitMqListener(this IApplicationBuilder app)
+        public static IApplicationBuilder UseAzureServiceBus(this IApplicationBuilder app)
         {
-            listener = app.ApplicationServices.GetService<IRabbitMQService>();
+            serviceBus = app.ApplicationServices.GetService<IAzureServiceBus>();
 
             var lifetime = app.ApplicationServices.GetService<IHostApplicationLifetime>();
 
@@ -27,12 +29,12 @@ namespace Beepbot.API.Extensions
 
         private static void OnStarted()
         {
-            listener.RegisterListeners();
+            serviceBus.RegisterListeners();
         }
 
         private static void OnStopping()
         {
-            listener.DeregisterListeners();
+            serviceBus.CloseConnection();
         }
     }
 }

@@ -18,6 +18,7 @@ using MediatR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Beepbot.BlobStorage;
+using Beepbot.Application.Services.AzureServiceBus;
 
 namespace Beepbot.Application.Features.Soundboard.Commands
 {
@@ -42,14 +43,14 @@ namespace Beepbot.Application.Features.Soundboard.Commands
         {
             private readonly IMapper mapper;
             private readonly AppDbContext context;
-            private readonly IRabbitMQService rabbitService;
+            private readonly IAzureServiceBus azureServiceBus;
             private readonly IAzureBlobStorageService blobStorageService;
 
-            public Handler(IMapper mapper, IRabbitMQService rabbitService, AppDbContext context, IAzureBlobStorageService blobStorageService)
+            public Handler(IMapper mapper, IAzureServiceBus azureServiceBus, AppDbContext context, IAzureBlobStorageService blobStorageService)
             {
                 this.mapper = mapper;
                 this.context = context;
-                this.rabbitService = rabbitService;
+                this.azureServiceBus = azureServiceBus;
                 this.blobStorageService = blobStorageService;
             }
 
@@ -77,7 +78,7 @@ namespace Beepbot.Application.Features.Soundboard.Commands
 
                 var message = JsonConvert.SerializeObject(messageObj, jsonSettings);
 
-                rabbitService.SendSoundboardMessage(message);
+                await azureServiceBus.SendSoundboardMessage(message);
 
                 return Unit.Value;
             }

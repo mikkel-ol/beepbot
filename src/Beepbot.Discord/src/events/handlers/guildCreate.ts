@@ -1,7 +1,7 @@
 import * as Discord from 'discord.js';
+import { GuildAddedProducer } from 'src/queues/azure-service-bus/producers/guildAdded';
 import Logger from '../../common/logger';
 import { GuildChannel } from '../../models/guildChannel';
-import GuildAddedProducer from '../../rabbitmq/producers/guildAdded';
 
 class GuildCreateHandler {
   static subscribe(bot: Discord.Client) {

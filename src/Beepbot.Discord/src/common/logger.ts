@@ -19,15 +19,15 @@ class Logger {
     }
 
     error(msg: string) {
-        console.log(chalk.red("ERROR ") + msg);
+        console.log(chalk.red("ERROR\t") + msg);
     }
 
     info(msg: string) {
-        console.log(chalk.white("INFO ") + msg);
+        console.log(chalk.white("INFO\t") + msg);
     }
 
     success(msg: string) {
-        console.log(chalk.green("SUCCESS ") + msg);
+        console.log(chalk.green("SUCCESS\t") + msg);
     }
 
     public static getInstance(): Logger {

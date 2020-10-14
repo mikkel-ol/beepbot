@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -17,7 +18,10 @@
     "noImplicitAny": false,
     "noImplicitThis": false,
     "strictNullChecks": false,
-    "typeRoots" : ["./node_modules/@types", "./types"]
+    "typeRoots" : ["./node_modules/@types", "./types"],
+    "paths": {
+      "@models/*": ["models/*"],
+    }
   },
   "include": ["src/**/*"]
 }

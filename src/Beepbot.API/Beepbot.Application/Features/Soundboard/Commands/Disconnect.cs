@@ -1,14 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-using Microsoft.EntityFrameworkCore;
-
 using AutoMapper;
 
-using Beepbot.Application.Services.RabbitMQ;
-using Beepbot.Domain.Entities;
-using Beepbot.Infrastructure.Exceptions;
-using Beepbot.Infrastructure.Extensions;
+using Beepbot.Application.Services.AzureServiceBus;
+using Beepbot.BlobStorage;
 using Beepbot.Persistence;
 
 using FluentValidation;
@@ -17,7 +13,6 @@ using MediatR;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Beepbot.BlobStorage;
 
 namespace Beepbot.Application.Features.Soundboard.Commands
 {
@@ -36,22 +31,22 @@ namespace Beepbot.Application.Features.Soundboard.Commands
             }
         }
 
-        public class Handler : RequestHandler<Command, Unit>
+        public class Handler : IRequestHandler<Command, Unit>
         {
             private readonly IMapper mapper;
             private readonly AppDbContext context;
-            private readonly IRabbitMQService rabbitService;
+            private readonly IAzureServiceBus azureServiceBus;
             private readonly IAzureBlobStorageService blobStorageService;
 
-            public Handler(IMapper mapper, IRabbitMQService rabbitService, AppDbContext context, IAzureBlobStorageService blobStorageService)
+            public Handler(IMapper mapper, IAzureServiceBus azureServiceBus, AppDbContext context, IAzureBlobStorageService blobStorageService)
             {
                 this.mapper = mapper;
                 this.context = context;
-                this.rabbitService = rabbitService;
+                this.azureServiceBus = azureServiceBus;
                 this.blobStorageService = blobStorageService;
             }
 
-            protected override Unit Handle(Command request)
+            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var messageObj = new
                 {
@@ -65,7 +60,7 @@ namespace Beepbot.Application.Features.Soundboard.Commands
 
                 var message = JsonConvert.SerializeObject(messageObj, jsonSettings);
 
-                rabbitService.SendDisconnectMessage(message);
+                await azureServiceBus.SendDisconnectMessage(message);
 
                 return Unit.Value;
             }

@@ -1,5 +1,5 @@
 import * as Amqp from 'amqp-ts';
-import Logger from '../common/logger';
+import Logger from '../../common/logger';
 import SoundboardConsumer from './consumers/soundboard';
 import GuildAddedProducer from './producers/guildAdded';
 

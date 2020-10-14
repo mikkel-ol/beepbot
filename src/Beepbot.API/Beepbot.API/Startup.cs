@@ -16,6 +16,7 @@ using Beepbot.API.Extensions;
 using Beepbot.API.Configurations.Authorization;
 using Beepbot.Domain.Options;
 using Microsoft.AspNetCore.HttpOverrides;
+using Beepbot.Application.Services.AzureServiceBus;
 
 namespace Beepbot.API
 {
@@ -34,7 +35,7 @@ namespace Beepbot.API
                 .AddJsonFile("appsettings.json", false)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddJsonFile("appsettings.Local.json", true, true)
-                .AddEnvironmentVariables("ASPNETCORE_");
+                .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
             {
@@ -64,13 +65,14 @@ namespace Beepbot.API
 
             services.AddOptions();
 
-            services.Configure<AzureBlobStorageOptions>(Configuration.GetSection("AzureBlobStorage"));
+            services.Configure<AzureBlobStorageOptions>(Configuration.GetSection("BlobStorage"));
 
             services.AddSignalR(Configuration, env);
 
             services.AddSwaggerGen();
 
             services.AddSingleton<IRabbitMQService, RabbitMQService>();
+            services.AddSingleton<IAzureServiceBus, AzureServiceBus>();
             services.AddSingleton<IConfiguration>(provider => Configuration);
 
             services.Configure<DiscordOptions>(Configuration.GetSection(DiscordOptions.Discord));
@@ -87,22 +89,27 @@ namespace Beepbot.API
                 app.UseDeveloperExceptionPage();
             }
 
+            // Nginx forwarding
+
+            // app.UseForwardedHeaders(new ForwardedHeadersOptions
+            // {
+            //     ForwardedHeaders = ForwardedHeaders.All
+            // });
+
+            app.UseHttpsRedirection();
+
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseRabbitMqListener();
+            //app.UseRabbitMqListener();
+
+            app.UseAzureServiceBus();
 
             app.UseSwagger();
 
             app.UseCors(env);
-
-            // Nginx forwarding
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
 
             app.UseEndpoints(endpoints =>
             {

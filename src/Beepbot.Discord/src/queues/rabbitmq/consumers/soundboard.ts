@@ -1,7 +1,7 @@
 import * as Amqp from 'amqp-ts';
-import { DisconnectCommand } from '../../models/disconnectCommand';
-import { PlayCommand } from '../../models/playCommand';
-import { Soundboard } from '../../soundboard';
+import { DisconnectCommand } from 'src/models/disconnectCommand';
+import { PlayCommand } from 'src/models/playCommand';
+import { Soundboard } from 'src/soundboard';
 
 class SoundboardConsumer {
   private static instance: SoundboardConsumer;

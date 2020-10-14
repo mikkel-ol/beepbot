@@ -1,6 +1,6 @@
 import * as Amqp from 'amqp-ts';
 import { Message } from 'amqp-ts';
-import { Guild } from '../../models/guild';
+import { Guild } from 'src/models/guild';
 
 class GuildAddedProducer {
   private static instance: GuildAddedProducer;
