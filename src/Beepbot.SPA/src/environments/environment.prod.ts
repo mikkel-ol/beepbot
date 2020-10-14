@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiRoot: "https://api.beepbot.dk/api",
-  hubRoot: "https://api.beepbot.dk/hubs"
+  apiRoot: "https://beepbot-api.azurewebsites.net/api",
+  hubRoot: "https://beepbot-api.azurewebsites.net/hubs"
 };
