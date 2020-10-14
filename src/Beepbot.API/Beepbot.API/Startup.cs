@@ -15,6 +15,7 @@ using Beepbot.API.Options;
 using Beepbot.API.Extensions;
 using Beepbot.API.Configurations.Authorization;
 using Beepbot.Domain.Options;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Beepbot.API
 {
@@ -33,7 +34,7 @@ namespace Beepbot.API
                 .AddJsonFile("appsettings.json", false)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddJsonFile("appsettings.Local.json", true, true)
-                .AddEnvironmentVariables();
+                .AddEnvironmentVariables("ASPNETCORE_");
 
             if (env.IsDevelopment())
             {
@@ -86,8 +87,6 @@ namespace Beepbot.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthentication();
@@ -98,6 +97,12 @@ namespace Beepbot.API
             app.UseSwagger();
 
             app.UseCors(env);
+
+            // Nginx forwarding
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.UseEndpoints(endpoints =>
             {
