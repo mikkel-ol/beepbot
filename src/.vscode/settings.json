@@ -3,6 +3,5 @@
         "node_modules{,/**}",
         ".vscode{,/**}"
     ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/5063ac00-d925-4993-ace3-128721adca02/resourceGroups/beepbot/providers/Microsoft.Web/sites/beepbot-discord",
     "appService.deploySubpath": "Beepbot.Discord"
 }
